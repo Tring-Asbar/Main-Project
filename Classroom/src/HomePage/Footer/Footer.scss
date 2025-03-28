@@ -1,0 +1,27 @@
+@import url('../../assets/Styles/global.scss');
+
+.footer{
+    display: flex;
+    justify-content:space-around;
+    width: 100%;
+    height: 26px;
+    .footer-right{
+        color: var(--footerContent);
+        width: 15%;
+        font-size:10px;
+        display:flex;
+        gap:20px;
+        margin:8px;
+    }
+
+    .footer-left{
+        color: var(--footerContent);
+        width: 15%;
+        font-size:10px;
+        display:flex;
+        gap:60px;
+        margin:8px;
+    }
+
+    
+}

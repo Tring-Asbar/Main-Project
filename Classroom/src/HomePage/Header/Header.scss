@@ -1,4 +1,59 @@
+@import url('../../assets/Styles/global.scss');
 .header{
     width: 100%;
-    background-color: black;
+    height: 62px;
+    background-color: var(--primaryColor);
+    display: flex;
+    gap: 1000px;
+    font-family: var(--interFont);
+    font-weight: 600;
+    font-size: 12px;
+    .header_logo{
+        justify-content: start;
+        position: relative;
+        cursor: pointer;
+        top: 20px;
+        left: 116px;
+        width: 115px;
+        height: 27px;
+    }
+    .header_content{
+        display: flex;
+        justify-content:end;
+        align-items: center;
+        gap: 70px;
+        color: white;
+        cursor: pointer;
+        a,li{
+            all: unset;
+        }
+    }
+}
+@media (max-width: 440px) {
+  
+}
+ 
+@media (min-width: 576px) and (max-width: 767.98px) {
+
+}
+
+@media (max-width: 767.98px) {
+ 
+}
+
+@media (min-width: 768px) and (max-width: 991.98px) {
+   
+
+}
+ 
+@media (min-width: 992px) and (max-width: 1199.98px) {
+   
+}
+ 
+@media (min-width: 1200px) and (max-width: 1349.98px) {
+   
+}
+ 
+@media (min-width: 1350px) {
+
 }

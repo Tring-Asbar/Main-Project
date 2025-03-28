@@ -1,18 +1,17 @@
 import './App.scss'
 import { Route, Routes } from 'react-router-dom'
-import AuthLayout from './Layouts/AuthLayout'
-import Login from './Login/Login'
+import AuthLayout from './Layouts/Auth/AuthLayout'
+import { publicRoutes } from './Routes/PublicRoutes'
 import HomePage from './HomePage/HomePage'
 
 function App() {
   
-  const publicRoutes = [
-    {path:'/login',element:<Login/>}
-  ]
+  
 
   return (
     <Routes>
-      <Route path='/' element=<HomePage/>></Route>
+      <Route path='/' element={<HomePage/>}>
+      </Route>
       <Route element = {<AuthLayout/>}>
       {publicRoutes.map((route)=>(
         <Route 
