@@ -8,10 +8,12 @@ const Header = () => {
   const navigate = useNavigate()
 
   const contents = [
-    {path:'/login',label: "School Admin"},
-    {path:'/login',label: "Teacher"},
-    {path:'/login',label: "PTA"},
+    {path:'/admin-login',label: "School Admin"},
+    {path:'/admin-login',label: "Teacher"},
+    {path:'/admin-login',label: "PTA"},
   ]
+  
+  
 
   return (
     <div className="header">

@@ -5,10 +5,10 @@ import AuthLayout from "../Layouts/Auth/AuthLayout"
 const HomePage = () => {
   return (
     <>
-    <AuthLayout/>
-      
+      <AuthLayout/>
+
     </>
   )
 }
 
-export default HomePage
+export default HomePage;

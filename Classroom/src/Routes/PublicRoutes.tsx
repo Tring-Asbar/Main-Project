@@ -1,5 +1,7 @@
 import Login from "../Login/Login"
 
 export const publicRoutes = [
-    {path:'/login',element:<Login/>}
+  {
+    path:'/admin-login',element:<Login/>
+  },
   ]

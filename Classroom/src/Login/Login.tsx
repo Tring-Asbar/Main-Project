@@ -1,30 +1,43 @@
 import { useForm } from "react-hook-form"
 import { SubmitHandler } from "react-hook-form"
+import { useNavigate } from "react-router-dom"
 import bg from '../assets/Images/Login-bg.svg'
+import { signIn } from "aws-amplify/auth"
 import './Login.scss'
 
 type FormData={
-  email : string
+  name : string
   password:string
 }
 
 const Login = () => {
 
+  const navigate = useNavigate();
+
   const {register,handleSubmit,formState:{errors}} = useForm<FormData>({
     defaultValues:{
-      email:"",
+      name:"",
       password:"",
     },
     mode:'onChange'
   })
   
-  const onSubmit:SubmitHandler<FormData> = (values)=>{
-    console.log(values)
-    
+  const onSubmit:SubmitHandler<FormData> = async(values)=>{
+    const {name,password} = values;
+    try{
+      const user = await signIn({
+        username : name,
+        password
+      })
+      console.log(user)
+      navigate('/admin-dashboard')
+    }
+    catch(err){
+      console.error(err);
+    }
   }
   return (
     <>
-      
       <div className="login_container">
       <div className="background">
         <img src={bg} alt="" />
@@ -40,12 +53,11 @@ const Login = () => {
                 type='text'
                 placeholder = 'Email'
                 className="field"
-                {...register("email",{
-                  required:"Email is required",
-                  pattern: { value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/, message: "Invalid email format" },
+                {...register("name",{
+                  required:"Username is required",
                 })}
                 />
-                {errors.email && <p className="err-msg">{errors.email.message}</p>}
+                {errors.name && <p className="err-msg">{errors.name.message}</p>}
               </div>
               <br />
               <div>
@@ -55,7 +67,6 @@ const Login = () => {
                 className="field"
                 {...register("password",{
                   required:"Password is required",
-                  minLength: { value: 8, message: 'Password must be at least 8 characters' },
                 })}
                 />
                 {errors.password && <p className="err-msg">{errors.password.message}</p>}

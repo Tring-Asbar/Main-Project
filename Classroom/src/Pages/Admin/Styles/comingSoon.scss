@@ -1,0 +1,11 @@
+@import url('../../../assets/Styles/global.scss');
+.Coming-Soon{
+    width:850px;
+    height: 655px;
+    background-color:var(--background);
+    margin: 41px 19px 25px 19px;
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

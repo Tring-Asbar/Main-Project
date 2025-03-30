@@ -1,0 +1,6 @@
+@import url('../../assets/Styles/global.scss');
+.dashboard-container{
+    display:flex;
+    justify-content: space-between;
+    background-color: var(--box-background);
+}

@@ -15,7 +15,8 @@ const Footer = () => {
         <p>Support</p>
       </div>
       <div className='footer-left'>
-        <p>@2024 Katon</p>
+      <p>@2025 Katon</p>
+      <p>Version:1.0.7.3</p>
       </div>
       <div className="footer-right">
        <a href=""><img src={facebook}/></a>

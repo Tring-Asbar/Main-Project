@@ -1,0 +1,28 @@
+@import url('../../assets/Styles/global.scss');
+
+.container{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    height: 628px;
+    .section1{
+        width: 28%;
+        margin:0px 200px;
+        p{
+            color: var(--fontColor);
+            font-weight: 500;
+            font-size: 14px;
+            line-height: 100%;
+        }
+        h1{
+            color: var(--boldFontColor);
+            font-weight: 800;
+            font-size: 50px;
+            line-height: 89%;
+        }
+    }
+    .section2{
+        width: 50%
+    }
+}
