@@ -1,0 +1,11 @@
+@import url('.././assets/Styles/global.scss');
+
+.no-data{
+    display: flex;
+    height: 60vh;
+    justify-content: center;
+    align-items: center;
+    color: var(--grayFont);
+    font-size: 22px;
+    font-weight: 500;
+}

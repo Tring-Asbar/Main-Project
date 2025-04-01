@@ -1,0 +1,51 @@
+@import url('../../assets/Styles/global.scss');
+
+
+.form-container{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    gap: 20px;
+    .form-header{
+        display: flex;
+        justify-content: space-around;
+        gap: 30%;
+    }
+        .form-section{
+            width: 90%;
+            height:63vh;
+            background-color: var(--box-background);
+            margin: 0% 5%;
+            border-radius: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: space-around;
+            input{
+                width: 25vw;
+                height: 4.3vh;
+                border-radius: 10px;
+                border: none;
+                outline: none;
+                padding-left: 10px;
+            }
+            .buttons{
+                display: flex;
+                justify-content: space-between;
+                .button1,.button2{
+                    width: 8vw;
+                    height: 4vh;
+                    background-color: var(--primaryColor);
+                    font-weight: 600;
+                    font-size: 12px;
+                    border: none;
+                    outline: none;
+                    border-radius:10px
+                }
+                .button1{
+                    background-color: var(--footerContent);
+                }
+            }
+            
+        }
+}

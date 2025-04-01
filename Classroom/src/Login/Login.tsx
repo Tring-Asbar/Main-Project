@@ -1,8 +1,10 @@
 import { useForm } from "react-hook-form"
+import { useState } from "react"
 import { SubmitHandler } from "react-hook-form"
 import { useNavigate } from "react-router-dom"
 import bg from '../assets/Images/Login-bg.svg'
 import { signIn } from "aws-amplify/auth"
+import ToastMessage from "../Components/customComponents/Toast/ToastMessage"
 import './Login.scss'
 
 type FormData={
@@ -14,6 +16,8 @@ const Login = () => {
 
   const navigate = useNavigate();
 
+  const [loading,setLoading] = useState(false)
+
   const {register,handleSubmit,formState:{errors}} = useForm<FormData>({
     defaultValues:{
       name:"",
@@ -23,6 +27,7 @@ const Login = () => {
   })
   
   const onSubmit:SubmitHandler<FormData> = async(values)=>{
+    setLoading(true);
     const {name,password} = values;
     try{
       const user = await signIn({
@@ -30,11 +35,14 @@ const Login = () => {
         password
       })
       console.log(user)
+      localStorage.setItem('loginpage',name)
       navigate('/admin-dashboard')
     }
     catch(err){
+      ToastMessage({ message: "Incorrect Username or Password", toastType: "error" });
       console.error(err);
     }
+    setLoading(false)
   }
   return (
     <>
@@ -51,7 +59,7 @@ const Login = () => {
               <div>
                 <input 
                 type='text'
-                placeholder = 'Email'
+                placeholder = 'Username'
                 className="field"
                 {...register("name",{
                   required:"Username is required",
@@ -73,7 +81,7 @@ const Login = () => {
               </div>
               <div className="submit">
                 <div></div>
-                <button type="submit">Login</button>
+                <button type="submit" disabled={loading}>Login</button>
               </div>
             </form>
           </div>

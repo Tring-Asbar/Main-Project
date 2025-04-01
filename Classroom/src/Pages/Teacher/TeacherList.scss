@@ -1,0 +1,42 @@
+@import url('../../assets/Styles/global.scss');
+
+.teacher-container{
+    .teacher-header{
+        display: flex;
+        flex-direction: row;
+        justify-content: space-around;
+        margin: 15px;
+        gap: 110px;
+        .all-teacher,.add-teacher{
+            color: var(--primaryColor);
+            font-size: 12px;
+            font-weight: 600;
+            cursor: pointer;
+        }
+        .search {
+            input{
+                width: 201px;
+                height: 28px;
+                border-radius: 20px;
+                background-color: var(--box-background);
+                border: none;
+                outline: none;
+                padding-left:10px;
+            }
+        }
+    }
+    .teacher-content{
+        display: flex;
+        justify-content: space-around;
+        gap: 10px;
+        flex-wrap: wrap;
+        margin: 40px;
+        .details{
+            width: 25%;
+            height: 25vh;
+            border-radius: 10px;
+            background-color: var(--lightBlue);
+        }
+    }
+}
+

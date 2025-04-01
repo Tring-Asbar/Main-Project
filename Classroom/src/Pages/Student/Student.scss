@@ -1,0 +1,11 @@
+@import url('../../assets/Styles/global.scss');
+
+.student{
+    height: 70vh;
+    color: var(--footerContent);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 22px;
+    font-weight: 500;
+}

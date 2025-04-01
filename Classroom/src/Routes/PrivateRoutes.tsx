@@ -4,11 +4,13 @@ import AdminNotification from "../Pages/Admin/AdminNotification";
 import AdminSettings from "../Pages/Admin/AdminSettings";
 import AdminSystemMessages from "../Pages/Admin/AdminSystemMessages";
 import AdminWorkshop from "../Pages/Admin/AdminWorkshop";
+import CustomizeSchool from "../Pages/School/CustomizeSchool";
 
 export const privateRoutes = [
     {
         path:'/admin-dashboard',
-        element :<AdminDashboard/>
+        element :<AdminDashboard/>,
+        
     },
     {
         path:'/admin-workshop',
@@ -30,4 +32,8 @@ export const privateRoutes = [
         path:'/admin-help',
         element :<AdminHelp/>
     },
+    {
+        path:'/admin-school',
+        element:<CustomizeSchool/>
+    }
 ]

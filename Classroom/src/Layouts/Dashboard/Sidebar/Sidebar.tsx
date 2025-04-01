@@ -2,6 +2,8 @@ import { Link } from "react-router-dom"
 import { signOut } from "aws-amplify/auth"
 import { useNavigate } from "react-router-dom"
 import './Sidebar.scss'
+// import { Dialog, DialogContent } from "@mui/material"
+
 const Sidebar = () => {
 
     const navigate = useNavigate();
@@ -33,26 +35,43 @@ const Sidebar = () => {
             label:'Help'
         }
     ]
+    
+    // const logoutPopup = () =>{
+    //     return(
+    //         <Dialog open={true}>
+    //             <DialogContent>
+    //                 <p>Are you sure you want to Log Out?</p>
+    //             </DialogContent>
+    //         </Dialog>
+    //     )
+    // }
 
     const handleLogout = async() =>{
         try{
             await signOut();
             console.log("Logout");
-            navigate('/admin-login');
+            localStorage.removeItem('loginpage')
+            navigate('/');
         }
         catch(err){
             console.error(err);
-        }
-        
+        } 
     }
 
   return (
     <div className="sidebar-container">
         <div className="sidebar-header">
         </div>
+
         <div className="sidebar-section">
-            <div className="section">School</div>
-            <div className="section">Calendar</div>
+            <div className="section" onClick={()=>navigate('/admin-school')}>
+                <p>Customize</p>
+                <p>School</p>
+            </div>
+            <div className="section">
+                <p>Edit</p>
+                <p>Calendar</p>
+            </div>
         </div>
         <div className="sidebar-menu">
             {sidebarMenu.map((menu)=>(

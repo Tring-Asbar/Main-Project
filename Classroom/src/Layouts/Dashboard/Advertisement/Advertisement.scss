@@ -1,9 +1,46 @@
 @import url('../../../assets//Styles/global.scss');
 
 .advertisement-content{
-    background-color: var(--background);
     width: 298px;
-    height: 655px;
+    height: 90vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
     margin: 41px 19px 25px 19px;
     border-radius: 10px;
+    .img1{
+        width: 238px;
+        height: 138px;
+        cursor: pointer;
+    }
+    .img2{
+        width:238px;
+        height: 488px;
+        cursor: pointer;
+    }
+}
+
+@media (max-width: 768px) {
+    .advertisement-content{
+        width: 100%;
+        height: auto;
+        margin: 20px 10px;
+        gap: 15px;
+        border-radius: 8px;
+        justify-content: center;
+        align-items: center;
+
+        .img1 {
+        width: 100%;
+        height: auto;
+        max-width: 300px;
+        margin-bottom: 10px;
+        }
+
+        .img2 {
+        width: 100%;
+        height: auto;
+        max-width: 300px;
+        }
+    }
 }
