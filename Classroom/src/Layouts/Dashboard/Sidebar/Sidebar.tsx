@@ -2,7 +2,7 @@ import { Link } from "react-router-dom"
 import { signOut } from "aws-amplify/auth"
 import { useNavigate } from "react-router-dom"
 import './Sidebar.scss'
-// import { Dialog, DialogContent } from "@mui/material"
+import KatonSchool from '../../../assets/Images/Katon.svg'
 
 const Sidebar = () => {
 
@@ -36,20 +36,11 @@ const Sidebar = () => {
         }
     ]
     
-    // const logoutPopup = () =>{
-    //     return(
-    //         <Dialog open={true}>
-    //             <DialogContent>
-    //                 <p>Are you sure you want to Log Out?</p>
-    //             </DialogContent>
-    //         </Dialog>
-    //     )
-    // }
+    
 
     const handleLogout = async() =>{
         try{
             await signOut();
-            console.log("Logout");
             localStorage.removeItem('loginpage')
             navigate('/');
         }
@@ -61,7 +52,9 @@ const Sidebar = () => {
   return (
     <div className="sidebar-container">
         <div className="sidebar-header">
+            <img src={KatonSchool} alt="" />
         </div>
+        <h4>Katon Virtual School</h4>
 
         <div className="sidebar-section">
             <div className="section" onClick={()=>navigate('/admin-school')}>

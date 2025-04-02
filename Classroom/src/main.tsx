@@ -1,16 +1,16 @@
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
 import './index.scss'
-import App from './App.tsx'
+import App from './App'
 import { ToastContainer } from 'react-toastify';
 import { BrowserRouter } from 'react-router-dom'
-import { config } from './Config/config.ts';
+import { config } from './Config/config';
 import { Amplify } from 'aws-amplify'
 import {ApolloClient,InMemoryCache,ApolloProvider, HttpLink, from} from '@apollo/client'
 import { setContext } from "@apollo/client/link/context";
 
 
-import { amplifyConfig } from './Config/config.ts'
+import { amplifyConfig } from './Config/config'
 
 
 Amplify.configure(amplifyConfig)
@@ -20,9 +20,18 @@ const httpLink = new HttpLink({
 
 })
 
-const authLink = setContext((_: any, { headers }:any) => {
-  const token = localStorage.getItem("CognitoIdentityServiceProvider.7sbasdbqu0u6br0mbpuls0hb7h.schooladmin01.accessToken");
+const getAccessTokenFromLocalStorage = () => {
+  const keys = Object.keys(localStorage);
+  const tokenKey = keys.find((key) =>
+    key.endsWith(".accessToken")
+  );
   
+  return tokenKey ? localStorage.getItem(tokenKey) : null;
+};
+
+const authLink = setContext((_: any, { headers }:any) => {
+  const token = getAccessTokenFromLocalStorage();
+  console.log(token)
   return {
     headers: {
       ...headers,

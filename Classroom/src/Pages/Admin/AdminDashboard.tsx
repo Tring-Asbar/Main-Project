@@ -11,8 +11,6 @@ const AdminDashboard = () => {
 
   const navigateContent = () =>{
     switch(activePage){
-      case "teachers":
-        return <TeacherList/>
       case "students":
         return <Student/>
       case "classroom":

@@ -16,7 +16,7 @@ const Content = () => {
           </div>
         </div>
         <div className="section2">
-            <img src={bg} alt="" />
+            <img src={bg} alt="background" />
         </div>
         
     </div>

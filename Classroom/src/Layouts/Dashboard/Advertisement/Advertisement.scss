@@ -2,21 +2,19 @@
 
 .advertisement-content{
     width: 298px;
-    height: 90vh;
+    height: 88vh;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     margin: 41px 19px 25px 19px;
     border-radius: 10px;
-    .img1{
+    .img1,.img2{
         width: 238px;
         height: 138px;
         cursor: pointer;
     }
     .img2{
-        width:238px;
         height: 488px;
-        cursor: pointer;
     }
 }
 
@@ -29,7 +27,7 @@
         border-radius: 8px;
         justify-content: center;
         align-items: center;
-
+        order: 2;
         .img1 {
         width: 100%;
         height: auto;
@@ -38,6 +36,7 @@
         }
 
         .img2 {
+        display: none;
         width: 100%;
         height: auto;
         max-width: 300px;

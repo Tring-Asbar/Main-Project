@@ -7,11 +7,29 @@
         justify-content: space-around;
         margin: 15px;
         gap: 110px;
-        .all-teacher,.add-teacher{
+        .all-teacher{
             color: var(--primaryColor);
             font-size: 12px;
             font-weight: 600;
             cursor: pointer;
+            span{
+                color: var(--footerContent);
+                font-weight: 400;
+            }
+        }
+        .add-teacher{
+            width: 2vw;
+            height: 4vh;
+            border-radius: 50%;
+            background-color: var(--primaryColor);
+            p{
+                position: relative;
+                top: 5%;
+                left: 25%;
+                font-size: 20px;
+                font-weight: 300;
+                color: var(--background);
+            }
         }
         .search {
             input{
@@ -27,15 +45,46 @@
     }
     .teacher-content{
         display: flex;
-        justify-content: space-around;
         gap: 10px;
         flex-wrap: wrap;
         margin: 40px;
         .details{
-            width: 25%;
-            height: 25vh;
+            width: 23%;
+            height: 26vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            gap: 9px;
+            align-items: center;
             border-radius: 10px;
             background-color: var(--lightBlue);
+            .rounded{
+                background-color: var(--background);
+                padding: 10px;
+                border-radius: 50%;
+            }
+            p{
+                font-size: 12px;
+            }
+            button{
+                background-color: var(--primaryColor);
+                padding: 5px 25px;
+                border: none;
+                border-radius: 20px;
+                outline:none;
+                color: var(--background);
+                font-size: 12px;
+            }
+        }
+    }
+}
+@media (max-width:768px){
+    .teacher-container{
+        .teacher-content{
+            flex-direction: column;
+            .details{
+                width: 100%;
+            }
         }
     }
 }

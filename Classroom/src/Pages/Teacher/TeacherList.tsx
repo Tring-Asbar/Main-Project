@@ -4,6 +4,7 @@ import { teachersList } from '../../graphql/TeachersListApi'
 import { useState } from 'react'
 import AddTeacher from './AddTeacher'
 import NoDataFound from '../../NoDataFound/NoDataFound'
+import User from '../../assets/Images/User.svg'
 
 
 const TeacherList = () => {
@@ -22,10 +23,27 @@ const TeacherList = () => {
   const allTeachers = () =>{
     return(
     <div className='teacher-content'>
-        {data?.allTeachers?.length>0?(
-        data?.allTeachers?.map((teacher:any)=>(
-          <div className="details">
-            {teacher.teacherId}
+        {data?.allTeachers?.nodes?.length>0?(
+        data?.allTeachers?.nodes?.map((teacher:any)=>(
+          <div className="details" key={teacher.teacherId}>
+            <div className='rounded'>
+              <img src={User} alt="" />
+            </div>
+            <div>
+              <h5>{teacher.teacherName}</h5>
+            </div>
+            
+              {teacher?.mainSubject?.nodes?.map((subject:any)=>(
+                <div>
+                  <p>{subject?.subjectBySjId?.subjectOriginalName} Teacher</p> 
+                </div>
+                
+              ))}
+              <div>
+                <button>View</button>
+              </div>
+            
+            
           </div>
         )))
         :(
@@ -37,8 +55,6 @@ const TeacherList = () => {
 
   const navigateContent = () =>{
     switch(activePage){
-      case "all teachers":
-        return allTeachers();
       case "add teacher":
         return <AddTeacher/>;
       default:
@@ -52,12 +68,15 @@ const TeacherList = () => {
   return (
     <div className='teacher-container'>
       <div className="teacher-header">
-        <div className="all-teacher" onClick={()=>setActivePage("all teachers")}>All Teachers</div>
+        <div className="all-teacher" onClick={()=>setActivePage("all teachers")}>
+          <p>All Teachers</p>
+          <span>{data.allTeachers.totalCount>0 ?(data.allTeachers.totalCount+" Staffs"):("No Staff")}</span>
+          </div>
         <div className="search">
           <input type="text" placeholder='Search'/>
         </div>
         <div className="add-teacher" onClick={()=>setActivePage("add teacher")}>
-          <p>Add Teacher</p>
+          <p>+</p>
         </div>
       </div>
       {navigateContent()}

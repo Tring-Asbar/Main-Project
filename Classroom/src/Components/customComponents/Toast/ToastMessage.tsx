@@ -13,12 +13,6 @@ const ToastMessage = ( { message, toastType }: toastProps) => {
             closeOnClick:true,
             position:'top-center'
         })
-    
-  return (
-    <>
-    
-    </>
-  )
 }
 
 export default ToastMessage

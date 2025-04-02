@@ -10,41 +10,87 @@
         display: flex;
         justify-content: space-around;
         gap: 30%;
+        div{
+            font-weight: 400;
+            font-size: 12px;
+        }
     }
         .form-section{
             width: 90%;
-            height:63vh;
+            height:62vh;
             background-color: var(--box-background);
             margin: 0% 5%;
             border-radius: 20px;
             display: flex;
             flex-direction: column;
             align-items: center;
-            justify-content: space-around;
+            justify-content: space-evenly;
+            p{
+                font-size: 12px;
+                font-weight: 400;
+            }
+            .err-msg{
+                color: var(--error);
+                font-size: 12px;
+                font-weight: 400;
+            }
+            .profile{
+                width: 102px;
+                height: 102px;
+                background-color: var(--background);
+                border-radius: 50%;
+                img{
+                    position:relative;
+                    top: 25%;
+                    left: 25%;
+                }
+            }
+            
+            label{
+                font-weight: 600;
+                font-size: 10px;
+                color: var(--primaryColor);
+                margin-left:15px;
+            }
             input{
                 width: 25vw;
-                height: 4.3vh;
+                height: 3.5vh;
                 border-radius: 10px;
                 border: none;
                 outline: none;
                 padding-left: 10px;
             }
+            .subject{
+                display: flex;
+                flex-direction: row;
+                justify-content: space-between;
+                margin-top: 15px;
+                input{
+                    width: 7.5vw;
+
+                }
+            }
             .buttons{
                 display: flex;
-                justify-content: space-between;
+                gap:200px;
+                
+                
                 .button1,.button2{
-                    width: 8vw;
-                    height: 4vh;
-                    background-color: var(--primaryColor);
+                    width: 6vw;
+                    height: 3vh;
+                    background-color: var(--background);
                     font-weight: 600;
                     font-size: 12px;
                     border: none;
                     outline: none;
-                    border-radius:10px
+                    border-radius:10px;
+                    cursor:pointer;
                 }
-                .button1{
-                    background-color: var(--footerContent);
+                .button2{
+                    background-color: var(--primaryColor);
+                    color: var(--background);
                 }
+
             }
             
         }

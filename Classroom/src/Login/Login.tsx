@@ -8,7 +8,7 @@ import ToastMessage from "../Components/customComponents/Toast/ToastMessage"
 import './Login.scss'
 
 type FormData={
-  name : string
+  username : string
   password:string
 }
 
@@ -20,7 +20,7 @@ const Login = () => {
 
   const {register,handleSubmit,formState:{errors}} = useForm<FormData>({
     defaultValues:{
-      name:"",
+      username:"",
       password:"",
     },
     mode:'onChange'
@@ -28,14 +28,13 @@ const Login = () => {
   
   const onSubmit:SubmitHandler<FormData> = async(values)=>{
     setLoading(true);
-    const {name,password} = values;
+    const {username,password} = values;
     try{
-      const user = await signIn({
-        username : name,
+       await signIn({
+        username,
         password
       })
-      console.log(user)
-      localStorage.setItem('loginpage',name)
+      localStorage.setItem('loginpage',username)
       navigate('/admin-dashboard')
     }
     catch(err){
@@ -61,11 +60,11 @@ const Login = () => {
                 type='text'
                 placeholder = 'Username'
                 className="field"
-                {...register("name",{
+                {...register("username",{
                   required:"Username is required",
                 })}
                 />
-                {errors.name && <p className="err-msg">{errors.name.message}</p>}
+                {errors.username && <p className="err-msg">{errors.username.message}</p>}
               </div>
               <br />
               <div>
