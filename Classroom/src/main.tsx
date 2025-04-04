@@ -4,13 +4,11 @@ import './index.scss'
 import App from './App'
 import { ToastContainer } from 'react-toastify';
 import { BrowserRouter } from 'react-router-dom'
-import { config } from './Config/config';
 import { Amplify } from 'aws-amplify'
 import {ApolloClient,InMemoryCache,ApolloProvider, HttpLink, from} from '@apollo/client'
 import { setContext } from "@apollo/client/link/context";
 
-
-import { amplifyConfig } from './Config/config'
+import { amplifyConfig,config } from './Config/config'
 
 
 Amplify.configure(amplifyConfig)

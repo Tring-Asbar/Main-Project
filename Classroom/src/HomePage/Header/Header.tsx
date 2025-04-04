@@ -1,16 +1,16 @@
-import { Link } from "react-router-dom"
 import Logo from '../../assets/Images/Header/KATON_Logo.svg'
 import '../Header/Header.scss'
-import { useNavigate } from "react-router-dom"
+import { useNavigate,Link } from "react-router-dom"
 
 const Header = () => {
 
   const navigate = useNavigate()
+  const path = '/admin-login'
 
   const contents = [
-    {path:'/admin-login',label: "School Admin"},
-    {path:'/admin-login',label: "Teacher"},
-    {path:'/admin-login',label: "PTA"},
+    {path,label: "School Admin"},
+    {path,label: "Teacher"},
+    {path,label: "PTA"},
   ]
   
   
@@ -22,7 +22,7 @@ const Header = () => {
       </div>
       <div className="header_content">
           {contents.map((content)=>(
-            <div key={content.path} className="content">
+            <div key={content.path} className="content {}" >
               <Link to={content.path}>
                 {content.label}
               </Link>

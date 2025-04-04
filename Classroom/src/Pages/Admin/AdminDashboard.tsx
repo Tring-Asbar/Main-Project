@@ -24,17 +24,20 @@ const AdminDashboard = () => {
 
   
   return (
-    <div className="admin-dashboard">
+    <>
+    <div className="admin-dashboard" style={{display:"flex",flexDirection:'column'}}>
       <div className="admin-header">
-        <p onClick={()=>setActivePage("teachers")}>Teachers</p>
-        <p onClick={()=>(setActivePage("students"))}>Students</p>
-        <p onClick={()=>setActivePage("classroom")}>Classroom</p>
-        <p onClick={()=>setActivePage("announcement")}>Announcement</p>
+        <p onClick={()=>setActivePage("teachers")} className={activePage==='teachers'? "active":""}>Teachers</p>
+        <p onClick={()=>setActivePage("students")} className={activePage==='students'? "active":""}>Students</p>
+        <p onClick={()=>setActivePage("classroom")} className={activePage==='classroom'? "active":""}>Classroom</p>
+        <p onClick={()=>setActivePage("announcement")} className={activePage==='announcement'? "active":""}>Announcement</p>
       </div>
       <div className="dashboard-content">
         {navigateContent()}
       </div>
+      
     </div>
+    </>
   )
 }
 

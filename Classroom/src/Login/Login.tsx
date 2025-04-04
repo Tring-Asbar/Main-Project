@@ -1,6 +1,5 @@
-import { useForm } from "react-hook-form"
 import { useState } from "react"
-import { SubmitHandler } from "react-hook-form"
+import { SubmitHandler,useForm } from "react-hook-form"
 import { useNavigate } from "react-router-dom"
 import bg from '../assets/Images/Login-bg.svg'
 import { signIn } from "aws-amplify/auth"
@@ -47,7 +46,7 @@ const Login = () => {
     <>
       <div className="login_container">
       <div className="background">
-        <img src={bg} alt="" />
+        <img src={bg}  alt="Image" />
       </div>
         <div className="login_content">
           <div>

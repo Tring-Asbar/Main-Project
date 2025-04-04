@@ -9,36 +9,29 @@
     margin: 41px 19px 25px 19px;
     border-radius: 10px;
     .img1,.img2{
-        width: 238px;
-        height: 138px;
+        width: 100%;
         cursor: pointer;
     }
-    .img2{
-        height: 488px;
-    }
+    
 }
 
 @media (max-width: 768px) {
     .advertisement-content{
         width: 100%;
-        height: auto;
+        height: 18vh;
         margin: 20px 10px;
         gap: 15px;
         border-radius: 8px;
         justify-content: center;
         align-items: center;
-        order: 2;
-        .img1 {
-        width: 100%;
-        height: auto;
-        max-width: 300px;
-        margin-bottom: 10px;
+        align-items: flex-start;
+        align-self: stretch;
+        .img{
+            width: 700vw;
+            height: 100vh;
         }
-
         .img2 {
         display: none;
-        width: 100%;
-        height: auto;
         max-width: 300px;
         }
     }

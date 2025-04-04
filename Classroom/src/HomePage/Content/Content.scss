@@ -45,6 +45,10 @@
     
 }
 @media (max-width: 768px) {
+    
+    .header{
+        display: none;
+    }
     .container {
         flex-direction: column;
         margin-left: 0;

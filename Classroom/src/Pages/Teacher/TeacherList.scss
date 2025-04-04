@@ -1,5 +1,10 @@
 @import url('../../assets/Styles/global.scss');
 
+.load-err{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
 .teacher-container{
     .teacher-header{
         display: flex;
@@ -8,10 +13,18 @@
         margin: 15px;
         gap: 110px;
         .all-teacher{
+            display: flex;
+            gap: 10px;
+            
             color: var(--primaryColor);
             font-size: 12px;
             font-weight: 600;
             cursor: pointer;
+            img{
+                width: 30px;
+                height: 30px;
+                background-color: var(--primaryColor);
+            }
             span{
                 color: var(--footerContent);
                 font-weight: 400;
@@ -22,10 +35,11 @@
             height: 4vh;
             border-radius: 50%;
             background-color: var(--primaryColor);
-            p{
-                position: relative;
-                top: 5%;
-                left: 25%;
+            cursor: pointer;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            p{                
                 font-size: 20px;
                 font-weight: 300;
                 color: var(--background);
@@ -48,6 +62,7 @@
         gap: 10px;
         flex-wrap: wrap;
         margin: 40px;
+        cursor: pointer;
         .details{
             width: 23%;
             height: 26vh;
@@ -60,11 +75,14 @@
             background-color: var(--lightBlue);
             .rounded{
                 background-color: var(--background);
-                padding: 10px;
+                
                 border-radius: 50%;
             }
             p{
                 font-size: 12px;
+                justify-content: center;
+                line-height: 25px;
+                text-align: center;
             }
             button{
                 background-color: var(--primaryColor);
@@ -80,10 +98,39 @@
 }
 @media (max-width:768px){
     .teacher-container{
+        .teacher-header{
+            gap: 200px;
+            padding-bottom: 20px;
+            border-bottom: 0.5px solid var(--footerContent) ;
+    
+           .search{
+                display: none;
+            }
+            .add-teacher{
+                border-radius: 10px;
+                width: 8vw;
+                height: 5vh;
+            }
+        }
+
         .teacher-content{
-            flex-direction: column;
+            flex-direction: row;
+            margin: 20px;
             .details{
                 width: 100%;
+                height: 20vh;
+                flex-direction: row;
+                justify-content: start;
+                padding-left: 20px;
+                gap: 10px;
+                .rounded{
+                    border-radius: 0%;
+                    padding: 0;
+                }
+                
+                button{
+                    display: none;
+                }
             }
         }
     }

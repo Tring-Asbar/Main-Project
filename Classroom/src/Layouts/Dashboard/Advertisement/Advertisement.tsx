@@ -6,10 +6,10 @@ const Advertisement = () => {
   return (
     <div className="advertisement-content">
       <div className='img1'>
-        <img src={ad1} alt="" />
+        <img src={ad1}  alt="Image" />
       </div>
       <div className='img2'>
-        <img src={ad2} alt="" />
+        <img src={ad2}  alt="Image" />
       </div>
     </div>
   )

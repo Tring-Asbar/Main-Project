@@ -1,11 +1,10 @@
 import { useForm , SubmitHandler} from "react-hook-form"
-import { useNavigate } from "react-router-dom"
 import './AddTeacher.scss'
-import react from '../../assets/react.svg'
 import { useMutation } from "@apollo/client"
 import { createTeacher } from "../../graphql/CreateTeacherApi"
 import ToastMessage from "../../Components/customComponents/Toast/ToastMessage"
 import User from '../../assets/Images/User.svg'
+import backBtn from '../../assets/Images/Back_btn.svg'
 
 type FormData = {
     name : string
@@ -14,10 +13,12 @@ type FormData = {
     password :string
     profileImageURL:string
 }
+type Props = {
+    setActivePage:(page:string)=> void;
+}
 
-const AddTeacher = () => {
+const AddTeacher = ({setActivePage}:Props) => {
 
-    const navigate = useNavigate();
 
     const[createTeachers] = useMutation(createTeacher)
 
@@ -64,15 +65,18 @@ const AddTeacher = () => {
     return (
         <div className="form-container">
             <div className="form-header">
-                <div>&lt;</div>
+                <div onClick={()=>setActivePage("all teachers")}>
+                    <img src={backBtn}  alt="Image" />
+                </div>
                 <div>Adding Teacher</div>
                 <div></div>
             </div>
             <form onSubmit={handleSubmit(onSubmit)} className="form-section">
+                    
                     <div className="profile">
-                        <img src={User} alt="" />
+                        <img src={User}  alt="Image" />
                     </div>
-                    <button type="button" onClick={()=>document.getElementById('fileInput')?.click()} className='file-input' style={{border:"none"}}><p>Upload photo +</p></button>
+                    <button type="button" onClick={()=>document.getElementById('fileInput')?.click()} className='file-input' ><p>Upload photo <span>+</span></p></button> 
                     {/* <input id='fileInput' className='file-input' type="file"  accept='image/*' style={{display:'none'}} required /> */}
                     
                     <div>
@@ -120,7 +124,6 @@ const AddTeacher = () => {
                         </div>
                         {errors.subject && <p className="err-msg">{errors.subject.message}</p> }
                     </div>
-
                     <div>
                         <label htmlFor="username">Login Access</label><br />
                         <input 
