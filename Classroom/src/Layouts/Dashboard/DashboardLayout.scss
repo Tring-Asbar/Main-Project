@@ -1,6 +1,24 @@
 @import url('../../assets/Styles/global.scss');
 .dashboard-container{
     display:flex;
-    justify-content: space-between;
+    justify-content: space-evenly;
+    gap: 0px;
     background-color: var(--box-background);
 }
+@media (max-width:768px){
+    .dashboard-container{
+        background-color: var(--background);
+        flex-direction: column;
+        .advertisement-content{
+            order: 2;
+        }
+        .admin-dashboard{
+            order: 3;
+        }
+        .sidebar-container{
+            order:1
+        }
+    }
+}
+
+

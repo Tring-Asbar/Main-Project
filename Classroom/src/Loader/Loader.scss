@@ -1,0 +1,15 @@
+.loader{
+    top: 0;
+    left: 0;
+    height: 20vh;
+    width: 15vw;
+    display: flex;
+    margin-left: 35%;
+    justify-content: center;
+    align-items: center;
+    z-index: 1;
+    .animation{
+        width: 50;
+        height: 50;
+    }
+}

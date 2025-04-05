@@ -1,12 +1,13 @@
-import { useForm } from "react-hook-form"
-import { SubmitHandler } from "react-hook-form"
+import { useState } from "react"
+import { SubmitHandler,useForm } from "react-hook-form"
 import { useNavigate } from "react-router-dom"
 import bg from '../assets/Images/Login-bg.svg'
 import { signIn } from "aws-amplify/auth"
+import ToastMessage from "../Components/customComponents/Toast/ToastMessage"
 import './Login.scss'
 
 type FormData={
-  name : string
+  username : string
   password:string
 }
 
@@ -14,33 +15,38 @@ const Login = () => {
 
   const navigate = useNavigate();
 
+  const [loading,setLoading] = useState(false)
+
   const {register,handleSubmit,formState:{errors}} = useForm<FormData>({
     defaultValues:{
-      name:"",
+      username:"",
       password:"",
     },
     mode:'onChange'
   })
   
   const onSubmit:SubmitHandler<FormData> = async(values)=>{
-    const {name,password} = values;
+    setLoading(true);
+    const {username,password} = values;
     try{
-      const user = await signIn({
-        username : name,
+       await signIn({
+        username,
         password
       })
-      console.log(user)
+      localStorage.setItem('loginpage',username)
       navigate('/admin-dashboard')
     }
     catch(err){
+      ToastMessage({ message: "Incorrect Username or Password", toastType: "error" });
       console.error(err);
     }
+    setLoading(false)
   }
   return (
     <>
       <div className="login_container">
       <div className="background">
-        <img src={bg} alt="" />
+        <img src={bg}  alt="Image" />
       </div>
         <div className="login_content">
           <div>
@@ -51,13 +57,13 @@ const Login = () => {
               <div>
                 <input 
                 type='text'
-                placeholder = 'Email'
+                placeholder = 'Username'
                 className="field"
-                {...register("name",{
+                {...register("username",{
                   required:"Username is required",
                 })}
                 />
-                {errors.name && <p className="err-msg">{errors.name.message}</p>}
+                {errors.username && <p className="err-msg">{errors.username.message}</p>}
               </div>
               <br />
               <div>
@@ -73,7 +79,7 @@ const Login = () => {
               </div>
               <div className="submit">
                 <div></div>
-                <button type="submit">Login</button>
+                <button type="submit" disabled={loading}>Login</button>
               </div>
             </form>
           </div>

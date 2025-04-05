@@ -23,6 +23,40 @@
         gap:60px;
         margin:8px;
     }
+}
 
-    
+@media (max-width: 768px) {
+    .footer {
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 10px;
+        height: auto;
+        padding: 20px 10px;
+
+        .footer-left,
+        .footer-right {
+            width: 80%;
+            justify-content: space-around;
+            gap: 15px;
+            font-size: 12px;
+            margin: 5px 0px;
+        }
+
+
+        .footer-left {
+            padding-bottom: 5px;
+            border-bottom: 1px solid var(--footerContent);
+        }
+
+        .footer-right {
+            justify-content: center;
+            gap: 10px;
+
+            img {
+                width: 12px;
+                height: 12px;
+            }
+        }
+    }
 }

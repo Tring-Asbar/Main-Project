@@ -6,6 +6,7 @@ import { privateRoutes } from './Routes/PrivateRoutes'
 import HomePage from './HomePage/HomePage'
 import DashboardLayout from './Layouts/Dashboard/DashboardLayout'
 import Content from './HomePage/Content/Content'
+import ProtectedRoutes from './Routes/ProtectedRoutes'
 
 function App() {
   
@@ -29,7 +30,12 @@ function App() {
           <Route 
           key={route.path}
           path={route.path}
-          element = {route.element}
+          element = 
+          {
+          <ProtectedRoutes>
+            {route.element}
+          </ProtectedRoutes>
+          }
           />
         ))}
       </Route>
