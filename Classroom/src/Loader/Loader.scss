@@ -13,3 +13,13 @@
         height: 50;
     }
 }
+
+@media (max-width:768px){
+    .loader{
+        width: 25vw;
+        height:30vw;
+        .animation{
+            margin-top:10%;
+        }
+    }
+}

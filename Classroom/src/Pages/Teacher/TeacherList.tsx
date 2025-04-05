@@ -1,3 +1,4 @@
+// TeacherList.tsx
 import { useQuery } from '@apollo/client';
 import './TeacherList.scss';
 import { teachersList } from '../../graphql/TeachersListApi';
@@ -7,11 +8,13 @@ import NoDataFound from '../../NoDataFound/NoDataFound';
 import User from '../../assets/Images/User.svg';
 import { debounce } from 'lodash';
 import './AddTeacher.scss';
-import Loader from '../../Loader/Loader'
+import Loader from '../../Loader/Loader';
 
 const TeacherList = () => {
   const [searchInput, setSearchInput] = useState('');
   const [searchQuery, setSearchQuery] = useState('');
+  const [activePage, setActivePage] = useState('all teachers');
+  const [selectedTeacherId, setSelectedTeacherId] = useState<string | null>(null);
 
   const debouncedSearch = useCallback(
     debounce((value: string) => {
@@ -28,25 +31,26 @@ const TeacherList = () => {
     variables: {
       searchInput: `%${searchQuery}%`,
       orderBy: ['T_NAME_ASC'],
-      limit:5,
+      limit: 6,
       offset: 0,
     },
   });
 
-  const [activePage, setActivePage] = useState('all teachers');
+  const handleViewTeacher = async (teacherId: string) => {
+    setSelectedTeacherId(teacherId);
+    setActivePage('add teacher');
+  };
 
   const allTeachers = () => {
-    if (loading) return (
-      <div className='teacher-content'><Loader/></div>
-    );
+    if (loading) return <div className='teacher-content'><Loader /></div>;
     if (error) return <p className="load-err">Error</p>;
     return (
-      <div className="teacher-content" onClick={() => setActivePage('add teacher')}>
+      <div className="teacher-content">
         {data?.allTeachers?.nodes?.length > 0 ? (
           data?.allTeachers?.nodes?.map((teacher: any) => (
             <div className="details" key={teacher.teacherId}>
               <div className="rounded">
-                <img src={User}  alt="Image" />
+                <img src={User} alt="Image" />
               </div>
               <div>
                 <h5>{teacher.teacherName}</h5>
@@ -57,11 +61,10 @@ const TeacherList = () => {
                 ))}
               </div>
               <div>
-                <button onClick={() => setActivePage('add teacher')}>View</button>
+                <button onClick={() => handleViewTeacher(teacher.teacherId)}>View</button>
               </div>
             </div>
           ))
-          
         ) : (
           <NoDataFound />
         )}
@@ -72,7 +75,7 @@ const TeacherList = () => {
   const navigateContent = () => {
     switch (activePage) {
       case 'add teacher':
-        return <AddTeacher setActivePage={setActivePage}/>;
+        return <AddTeacher setActivePage={setActivePage} selectedTeacherId={selectedTeacherId} />;
       default:
         return allTeachers();
     }
@@ -82,26 +85,24 @@ const TeacherList = () => {
     setSearchInput(event.target.value);
   };
 
-  
-
   return (
     <div className="teacher-container">
-      {activePage!=="add teacher" && (
-      <div className="teacher-header">
-        <div className="all-teacher" onClick={() => setActivePage('all teachers')}>
-          <img src={User} alt='Image'/>
-          <div>
-            <p>All Teachers</p>
-            <span>{data?.allTeachers?.totalCount > 0 ? `${data.allTeachers.totalCount} Staffs` : 'No Staff'}</span>
+      {activePage !== "add teacher" && (
+        <div className="teacher-header">
+          <div className="all-teacher" onClick={() => setActivePage('all teachers')}>
+            <img src={User} alt='Image' />
+            <div>
+              <p>All Teachers</p>
+              <span>{data?.allTeachers?.totalCount > 0 ? `${data.allTeachers.totalCount} Staffs` : 'No Staff'}</span>
+            </div>
+          </div>
+          <div className="search">
+            <input type="text" placeholder="Search" value={searchInput} onChange={handleInputChange} />
+          </div>
+          <div className="add-teacher" onClick={() =>{setSelectedTeacherId(null);setActivePage('add teacher');}}>
+            <p>+</p>
           </div>
         </div>
-        <div className="search">
-          <input type="text" placeholder="Search" value={searchInput} onChange={handleInputChange} />
-        </div>
-        <div className="add-teacher" onClick={() => setActivePage('add teacher')}>
-          <p>+</p>
-        </div>
-      </div>
       )}
       {navigateContent()}
     </div>
