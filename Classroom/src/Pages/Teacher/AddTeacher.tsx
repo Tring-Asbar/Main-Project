@@ -178,7 +178,6 @@ const AddTeacher = ({ setActivePage, selectedTeacherId }: Props) => {
             Upload photo <span>+</span>
           </p>
         </button>
-        {/* Optional file input: You can implement file upload if needed */}
         {/* <input id='fileInput' type="file" accept='image/*' style={{display:'none'}} /> */}
 
         <div>

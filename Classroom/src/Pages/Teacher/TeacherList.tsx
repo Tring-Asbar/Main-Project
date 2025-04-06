@@ -9,6 +9,7 @@ import User from '../../assets/Images/User.svg';
 import { debounce } from 'lodash';
 import './AddTeacher.scss';
 import Loader from '../../Loader/Loader';
+import SearchIcon from '@mui/icons-material/Search';
 
 const TeacherList = () => {
   const [searchInput, setSearchInput] = useState('');
@@ -31,7 +32,7 @@ const TeacherList = () => {
     variables: {
       searchInput: `%${searchQuery}%`,
       orderBy: ['T_NAME_ASC'],
-      limit: 6,
+      limit: 9,
       offset: 0,
     },
   });
