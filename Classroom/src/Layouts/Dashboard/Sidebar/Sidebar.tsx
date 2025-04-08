@@ -10,9 +10,9 @@ import sysMsg from '../../../assets/Images/MenuIcon/sys-msg.svg'
 import settings from '../../../assets/Images/MenuIcon/settings.svg'
 import help from '../../../assets/Images/MenuIcon/help.svg'
 import logout from '../../../assets/Images/MenuIcon/logout.svg'
-import { Dialog, DialogContent, DialogActions, Button } from "@mui/material";
+import Logout from '../../../assets/Images/logout.gif'
+import { Dialog,Button } from "@mui/material";
 import MenuIcon from '@mui/icons-material/Menu';
-import NotificationsRoundedIcon from '@mui/icons-material/NotificationsRounded';
 
 const Sidebar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -39,14 +39,13 @@ const Sidebar = () => {
 
   const logoutPopup = () => (
     <div className="popup">
-      <Dialog open={true} maxWidth='sm'>
-        <DialogContent>
+      <Dialog open={true} className="dialogMainContainer" >
+        <img src={Logout} alt="" />
           <p>Are you sure you want to Log Out?</p>
-        </DialogContent>
-        <DialogActions>
+        <div className="buttons">
           <Button variant="contained" onClick={handleLogout} className="yes">Yes</Button>
           <Button variant="contained" onClick={() => setLogoutBtn(false)} className="no" color="inherit">No</Button>
-        </DialogActions>
+        </div>
       </Dialog>
     </div>
   );

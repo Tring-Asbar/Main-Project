@@ -7,11 +7,14 @@ import { BrowserRouter } from 'react-router-dom'
 import { Amplify } from 'aws-amplify'
 import {ApolloClient,InMemoryCache,ApolloProvider, HttpLink, from} from '@apollo/client'
 import { setContext } from "@apollo/client/link/context";
+import { onError } from '@apollo/client/link/error';
+import ToastMessage from './Components/customComponents/Toast/ToastMessage';
 
 import { amplifyConfig,config } from './Config/config'
 
 
 Amplify.configure(amplifyConfig)
+
 
 const httpLink = new HttpLink({
   uri :config.backendUrl,
@@ -38,8 +41,33 @@ const authLink = setContext((_: any, { headers }:any) => {
   };
 });
 
+const errorLink = onError(({ graphQLErrors, networkError }) => {
+  let shouldLogout = false;
+
+  if (graphQLErrors) {
+    for (let err of graphQLErrors) {
+      if (err.extensions?.code === 'UNAUTHENTICATED') {
+        shouldLogout = true;
+        break;
+      }
+    }
+  }
+
+  if (networkError && 'statusCode' in networkError && networkError.statusCode === 401) {
+    shouldLogout = true;
+  }
+
+  if (shouldLogout) {
+    localStorage.clear();
+    ToastMessage({message:"Session expired. Please log in again.",toastType:'error'})
+    setTimeout(() => {
+      window.location.href = '/admin-login';
+    }, 3000); 
+  }
+});
+
 const client = new ApolloClient({
-  link: from([authLink,httpLink]),
+  link: from([authLink,httpLink,errorLink]),
   cache:new InMemoryCache(),
 });
 

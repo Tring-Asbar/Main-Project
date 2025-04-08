@@ -23,7 +23,7 @@ const CustomizeSchool = () => {
       website:"",
       description:"",
       username:"schooladmin01",
-      password:"Classroom360@123",
+      password:import.meta.env.VITE_LOGIN_PASSWORD
     }
   })
    const onSubmit: SubmitHandler<FormData> = async (data) => {
@@ -40,10 +40,8 @@ const CustomizeSchool = () => {
     try {
       const response = await updateSchoolAdminDetails({ variables: { input } });
       console.log('Update success:', response.data.updateSchoolAdminDetails.message);
-      // Optionally, show a toast or success message here
     } catch (error) {
       console.error('Update failed:', error);
-      // Optionally, show an error toast
     }
    }
 

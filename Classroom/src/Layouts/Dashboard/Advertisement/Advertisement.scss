@@ -8,9 +8,20 @@
     justify-content: space-between;
     margin: 41px 19px 25px 19px;
     border-radius: 10px;
-    .img1,.img2{
+    .img1{
         width: 100%;
         cursor: pointer;
+    }
+    .img2{
+        width: 100%;
+        cursor: pointer;
+        .loader-container{
+            
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            
+        }
     }
     
 }
@@ -33,6 +44,7 @@
         .img2 {
         display: none;
         max-width: 300px;
+        
         }
     }
 }

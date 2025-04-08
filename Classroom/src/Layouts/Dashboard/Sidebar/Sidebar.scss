@@ -1,21 +1,44 @@
 @import url('../../../assets/Styles/global.scss');
 
-.popup {
-  .yes {
+
+ .dialogMainContainer {
+  
+  display: flex;
+  justify-content: center;
+  padding: 10px;
+  border-radius:10px;
+  img{
+    width: 100px;
+    height: 100px;
+    margin: 0px 80px;
+
+  }
+  .buttons{
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+  }
+
+  .yes , .no {
     border-radius: 50px;
     background-color: var(--primaryColor);
+    margin-bottom: 10px;
+    text-transform: capitalize !important;
   }
 
   .no {
     border-radius: 20px;
     background-color: var(--box-background);
+    text-transform: capitalize !important;
   }
 
   p {
+    margin: 20px 20px;
     font-weight: 700;
-    font-size: 12px;
+    font-size: 14px;
   }
 }
+
 
 .sidebar-container {
   display: flex;

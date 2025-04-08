@@ -1,5 +1,16 @@
 @import url('../../assets/Styles/global.scss');
 
 .splash{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
     background-color: var(--primaryColor);
+    height: 100vh;
+    h1,p{
+        color: var(--background);
+    }
+    p{
+        font-size: 8px;
+    }
 }

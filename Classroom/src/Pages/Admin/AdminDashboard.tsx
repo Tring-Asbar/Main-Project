@@ -21,16 +21,22 @@ const AdminDashboard = () => {
         return <TeacherList/>
     }
   }
+  const setActiveTab=(value:string,index:number)=>{
+    localStorage.removeItem('index');
+    setActivePage(value);
+    localStorage.setItem('index',index+"");
+
+  }
 
   
   return (
     <>
     <div className="admin-dashboard" style={{display:"flex",flexDirection:'column'}}>
       <div className="admin-header">
-        <p onClick={()=>setActivePage("teachers")} className={activePage==='teachers'? "active":""}>Teachers</p>
-        <p onClick={()=>setActivePage("students")} className={activePage==='students'? "active":""}>Students</p>
-        <p onClick={()=>setActivePage("classroom")} className={activePage==='classroom'? "active":""}>Classroom</p>
-        <p onClick={()=>setActivePage("announcement")} className={activePage==='announcement'? "active":""}>Announcement</p>
+        <p onClick={()=>setActiveTab("teachers",0)} className={activePage==='teachers'? "active":""}>Teachers</p>
+        <p onClick={()=>setActiveTab("students",1)} className={activePage==='students'? "active":""}>Students</p>
+        <p onClick={()=>setActiveTab("classroom",2)} className={activePage==='classroom'? "active":""}>Classroom</p>
+        <p onClick={()=>setActiveTab("announcement",3)} className={activePage==='announcement'? "active":""}>Announcement</p>
       </div>
       <div className="dashboard-content">
         {navigateContent()}

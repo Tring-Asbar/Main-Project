@@ -60,6 +60,7 @@
     .teacher-content{
         display: flex;
         gap: 10px;
+        height:450px;
         overflow-y: auto;
         flex-wrap: wrap;
         margin: 40px;
@@ -105,6 +106,11 @@
             }
         }
     }
+}
+.pagination-controls{
+    display: flex;
+    justify-content: end;
+    margin: 20px;
 }
 @media (max-width:768px){
     .teacher-container{

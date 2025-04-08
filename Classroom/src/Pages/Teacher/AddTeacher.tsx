@@ -1,17 +1,17 @@
 import { useForm, SubmitHandler, useFieldArray } from "react-hook-form";
 import './AddTeacher.scss';
 import { useMutation, useLazyQuery } from "@apollo/client";
-import { createTeacher } from "../../graphql/CreateTeacherApi";
-import { teacherById } from "../../graphql/TeacherByIdApi";
-import { updateTeacher } from "../../graphql/UpdateTeacherApi";
-import { DeleteTeacher } from "../../graphql/DeleteTeacherApi";
+import { createTeacher } from "../../graphql/mutation";
+import { teacherById } from "../../graphql/query";
+import { updateTeacher } from "../../graphql/mutation";
+import { DeleteTeacher } from "../../graphql/mutation";
 import ToastMessage from "../../Components/customComponents/Toast/ToastMessage";
 import User from '../../assets/Images/User.svg';
 import backBtn from '../../assets/Images/Back_btn.svg';
 import { useEffect, useState } from "react";
-import getDecryptedDataWithSecretKey from "../../utils/Decrypt";
-import { GET_PRESIGNED_URL } from "../../graphql/UploadImageApi";
-
+import getDecryptedDataWithSecretKey from "../../utils/getDecryptedDataWithSecretKey";
+import { GET_PRESIGNED_URL } from "../../graphql/query";
+import { userNameValidation , passwordValidation } from "./Validation";
 import moment from "moment";
 
 type SubjectType = {
@@ -33,6 +33,7 @@ type Props = {
 };
 
 const AddTeacher = ({ setActivePage, selectedTeacherId }: Props) => {
+  const allTeachers = "all teachers"
   const [createTeachers] = useMutation(createTeacher);
   const [updateTeachers] = useMutation(updateTeacher);
   const[deleteTeacherById] = useMutation(DeleteTeacher)
@@ -104,6 +105,8 @@ const AddTeacher = ({ setActivePage, selectedTeacherId }: Props) => {
     }
   }, [teacherByIdDetails, setValue]);
 
+  
+
   const handleUploadtoS3 = async (file: File, setImageURL: (url: string) => void) => {
     try {
       const originalName = file.name.substring(0, file.name.lastIndexOf(".")) || file.name;
@@ -118,8 +121,9 @@ const AddTeacher = ({ setActivePage, selectedTeacherId }: Props) => {
   
       const preSignedUrl = data?.getUploadPresignedUrl?.preSignedUrl;
       console.log(preSignedUrl)
-      if (!preSignedUrl) 
+      if (!preSignedUrl){
         throw new Error("Failed to get presigned URL");
+      }
   
       const uploadRes = await fetch(preSignedUrl, {
         method: "PUT",
@@ -154,6 +158,8 @@ const AddTeacher = ({ setActivePage, selectedTeacherId }: Props) => {
     }
   }, [profileImageURL]);
 
+  
+
   const handleDelete = async () => {
     try {
       const res = await deleteTeacherById({
@@ -166,7 +172,7 @@ const AddTeacher = ({ setActivePage, selectedTeacherId }: Props) => {
 
       if (res?.data?.deleteTeacherById?.message) {
         ToastMessage({ message: res.data.deleteTeacherById.message, toastType: "success" });
-        setActivePage("all teachers");
+        setActivePage(allTeachers);
         
       }
     } catch (err) {
@@ -200,7 +206,8 @@ const AddTeacher = ({ setActivePage, selectedTeacherId }: Props) => {
 
         if (updateRes) {
           ToastMessage({ message: "Teacher updated successfully", toastType: "success" });
-          setActivePage("all teachers");
+          setActivePage(allTeachers);
+          
         }
       } else {
         const { data: createRes } = await createTeachers({
@@ -222,7 +229,7 @@ const AddTeacher = ({ setActivePage, selectedTeacherId }: Props) => {
           ToastMessage({ message: "Registration success", toastType: "success" });
           reset();
           setProfileImageURL(User);
-          setActivePage("all teachers");
+          setActivePage(allTeachers);
         }
       }
     } catch (err) {
@@ -234,7 +241,7 @@ const AddTeacher = ({ setActivePage, selectedTeacherId }: Props) => {
   return (
     <div className="form-container">
       <div className="form-header">
-        <div onClick={() => setActivePage("all teachers")}>
+        <div onClick={() => setActivePage(allTeachers)}>
           <img src={backBtn} alt="Back" />
         </div>
         <div>{selectedTeacherId ?"Active" : "Adding Teacher"}</div>
@@ -301,24 +308,7 @@ const AddTeacher = ({ setActivePage, selectedTeacherId }: Props) => {
             id="username"
             {...register("username", {
               required: "Username is required",
-              
-              validate:{
-                    startsWithAlphabet: value =>
-                      /^[a-zA-Z]/.test(value) || "Username must start with alphabets",
-                    alphanumeric: value=>
-                      /^[a-zA-Z0-9@._-]+$/.test(value) || "Username must contain alphanumeric characters, '@', '.', '-', and '_'",
-                    consecutiveCharacters: value =>
-                      /(?!.*([@._-])\1\1)/.test(value) || "Username cannot contain more than two consecutive '@', '.', '-', or '_'",
-                    onlyNumbers:value =>
-                      /^(?!\d+$)/.test(value) || "Username cannot be only numbers", 
-                    minLength:value=>
-                      /^.{6,}$/.test(value) || "Username should be at least 6 characters",
-                    maxLength:value=>
-                      /^.{0,50}$/.test(value) || "Username should not exceed 50 characters",
-
-              },
-              
-              
+              validate: userNameValidation
             })}
           />
           {errors.username && (
@@ -333,14 +323,7 @@ const AddTeacher = ({ setActivePage, selectedTeacherId }: Props) => {
             id="password"
             {...register("password", {
               required: "Password is required",
-              minLength: {
-                value: 8,
-                message: "Password should be at least 8 characters",
-              },
-              maxLength: {
-                value: 30,
-                message: "Password should not exceed 30 characters",
-              },
+              validate:passwordValidation
             })}
           />
           {errors.password && (
