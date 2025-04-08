@@ -1,4 +1,4 @@
-// TeacherList.tsx
+
 import { useQuery } from '@apollo/client';
 import './TeacherList.scss';
 import { teachersList } from '../../graphql/TeachersListApi';
@@ -9,7 +9,6 @@ import User from '../../assets/Images/User.svg';
 import { debounce } from 'lodash';
 import './AddTeacher.scss';
 import Loader from '../../Loader/Loader';
-import SearchIcon from '@mui/icons-material/Search';
 
 const TeacherList = () => {
   const [searchInput, setSearchInput] = useState('');
@@ -24,34 +23,43 @@ const TeacherList = () => {
     []
   );
 
+  
   useEffect(() => {
     debouncedSearch(searchInput);
   }, [searchInput, debouncedSearch]);
 
-  const { data, loading, error } = useQuery(teachersList, {
+  const { data, loading, error,refetch } = useQuery(teachersList, { 
     variables: {
       searchInput: `%${searchQuery}%`,
       orderBy: ['T_NAME_ASC'],
       limit: 9,
       offset: 0,
     },
+    fetchPolicy:'network-only',
+
   });
 
   const handleViewTeacher = async (teacherId: string) => {
     setSelectedTeacherId(teacherId);
     setActivePage('add teacher');
+  
   };
+  
+  
 
   const allTeachers = () => {
-    if (loading) return <div className='teacher-content'><Loader /></div>;
-    if (error) return <p className="load-err">Error</p>;
+    if (loading) 
+      return <div><Loader /></div>;
+    if (error) 
+      return <p className="load-err">Error</p>;
     return (
       <div className="teacher-content">
+        
         {data?.allTeachers?.nodes?.length > 0 ? (
           data?.allTeachers?.nodes?.map((teacher: any) => (
-            <div className="details" key={teacher.teacherId}>
+            <div className="details" key={teacher.teacherId} onClick={() => handleViewTeacher(teacher.teacherId)}>
               <div className="rounded">
-                <img src={User} alt="Image" />
+                <img src={teacher?.avatarUrl?(teacher.avatarUrl):(User)} alt="Image" />
               </div>
               <div>
                 <h5>{teacher.teacherName}</h5>

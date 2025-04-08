@@ -29,6 +29,4 @@ export const teacherById = gql`
 }
 
 `;
-
-
   

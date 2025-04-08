@@ -7,6 +7,7 @@ import HomePage from './HomePage/HomePage'
 import DashboardLayout from './Layouts/Dashboard/DashboardLayout'
 import Content from './HomePage/Content/Content'
 import ProtectedRoutes from './Routes/ProtectedRoutes'
+import SplashScreen from './HomePage/SplashScreen/SplashScreen'
 
 function App() {
   
@@ -15,6 +16,7 @@ function App() {
     <Routes>
       <Route path='/' element={<HomePage/>}>
       <Route index element = {<Content/>}/>
+      <Route index element ={<SplashScreen/>}/>
       </Route>
       <Route element = {<AuthLayout/>}>
         {publicRoutes.map((route)=>(

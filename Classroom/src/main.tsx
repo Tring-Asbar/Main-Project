@@ -18,7 +18,7 @@ const httpLink = new HttpLink({
 
 })
 
-const getAccessTokenFromLocalStorage = () => {
+export const getAccessTokenFromLocalStorage = () => {
   const keys = Object.keys(localStorage);
   const tokenKey = keys.find((key) =>
     key.endsWith(".accessToken")

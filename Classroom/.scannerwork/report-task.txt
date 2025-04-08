@@ -2,5 +2,5 @@ projectKey=Classroom
 serverUrl=http://quality.tringbytes.com
 serverVersion=9.9.8.100196
 dashboardUrl=http://quality.tringbytes.com/dashboard?id=Classroom
-ceTaskId=AZX5-Bom9mIhvicWxASm
-ceTaskUrl=http://quality.tringbytes.com/api/ce/task?id=AZX5-Bom9mIhvicWxASm
+ceTaskId=AZYPhOuvCe_vaTPJO5qv
+ceTaskUrl=http://quality.tringbytes.com/api/ce/task?id=AZYPhOuvCe_vaTPJO5qv

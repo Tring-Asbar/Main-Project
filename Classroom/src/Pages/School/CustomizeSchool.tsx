@@ -1,5 +1,7 @@
 import './CustomizeSchool.scss'
-import { useForm } from 'react-hook-form'
+import { SubmitHandler, useForm } from 'react-hook-form'
+import { UPDATE_SCHOOL } from '../../graphql/UpdateSchoolApi'
+import { useMutation } from '@apollo/client'
 
 type FormData = {
   schoolname:string
@@ -12,21 +14,42 @@ type FormData = {
 }
 
 const CustomizeSchool = () => {
+  const [updateSchoolAdminDetails] = useMutation(UPDATE_SCHOOL);
 
-  const {register} = useForm<FormData>({
+  const {register,handleSubmit} = useForm<FormData>({
     defaultValues:{
-      schoolname:"",
-      email:"",
+      schoolname:"Katon",
+      email:"Classroom360@mailinator.com",
       website:"",
       description:"",
-      username:"",
-      password:"",
+      username:"schooladmin01",
+      password:"Classroom360@123",
     }
   })
+   const onSubmit: SubmitHandler<FormData> = async (data) => {
+    const input = {
+    schoolName: data.schoolname.trim(),
+      emailId: data.email.trim(),
+      website: data.website.trim(),
+      description:
+        data.description === '' ? null : data.description.trim(),
+      schoolAvatarFileName: null,
+      userName:data.username.trim(),
+      passWord:data.password.trim()
+    }
+    try {
+      const response = await updateSchoolAdminDetails({ variables: { input } });
+      console.log('Update success:', response.data.updateSchoolAdminDetails.message);
+      // Optionally, show a toast or success message here
+    } catch (error) {
+      console.error('Update failed:', error);
+      // Optionally, show an error toast
+    }
+   }
 
   return (
     <div className="school">
-      <form className='form-fields'>
+      <form className='form-fields' onSubmit={handleSubmit(onSubmit)}>
         <button className='edit'style={{display:'flex',justifyContent:'end'}}>Edit</button>
       <div className="profile">
         <img src=""  alt="Image" />
@@ -83,7 +106,9 @@ const CustomizeSchool = () => {
           id='username'
           {...register('username',{
             required:'Username is required'
+            
           })}
+          disabled={true}
           />
         </div>
         <div>

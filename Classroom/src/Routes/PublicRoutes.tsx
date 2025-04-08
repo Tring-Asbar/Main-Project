@@ -4,4 +4,5 @@ export const publicRoutes = [
   {
     path:'/admin-login',element:<Login/>
   },
+    
 ]

@@ -3,7 +3,13 @@ import { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import './Sidebar.scss';
 import KatonSchool from '../../../assets/Images/Katon.svg';
-import icon from '../../../assets/Images/MenuIcon/DashboardIcon.svg';
+import dashboard from '../../../assets/Images/MenuIcon/Icon.svg'
+import workshop from '../../../assets/Images/MenuIcon/workshop.svg'
+import notification from '../../../assets/Images/MenuIcon/notification.svg'
+import sysMsg from '../../../assets/Images/MenuIcon/sys-msg.svg'
+import settings from '../../../assets/Images/MenuIcon/settings.svg'
+import help from '../../../assets/Images/MenuIcon/help.svg'
+import logout from '../../../assets/Images/MenuIcon/logout.svg'
 import { Dialog, DialogContent, DialogActions, Button } from "@mui/material";
 import MenuIcon from '@mui/icons-material/Menu';
 import NotificationsRoundedIcon from '@mui/icons-material/NotificationsRounded';
@@ -14,18 +20,17 @@ const Sidebar = () => {
   const navigate = useNavigate();
 
   const sidebarMenu = [
-    { icon, path: '/admin-dashboard', label: 'Dashboard' },
-    { icon, path: '/admin-workshop', label: 'Workshop' },
-    { icon, path: '/admin-notification', label: 'Notification' },
-    { icon, path: '/admin-system-message', label: 'System Messages' },
-    { icon, path: '/admin-settings', label: 'Settings' },
-    { icon, path: '/admin-help', label: 'Help' }
+    { icon:dashboard, path: '/admin-dashboard', label: 'Dashboard' },
+    { icon:workshop, path: '/admin-workshop', label: 'Workshop' },
+    { icon:notification, path: '/admin-notification', label: 'Notification' },
+    { icon:sysMsg, path: '/admin-system-message', label: 'System Messages' },
+    { icon:settings, path: '/admin-settings', label: 'Settings' },
+    { icon:help, path: '/admin-help', label: 'Help' }
   ];
 
   const handleLogout = async () => {
     try {
       await signOut();
-      localStorage.removeItem('loginpage');
       navigate('/');
     } catch (err) {
       console.error(err);
@@ -72,10 +77,11 @@ const Sidebar = () => {
       <div className="sidebar-menu">
         {sidebarMenu.map((menu) => (
           <div key={menu.path} className="menu">
+            <img src={menu.icon} alt="icon"/>
             <Link to={menu.path}>{menu.label}</Link>
           </div>
         ))}
-        <div onClick={() => setLogoutBtn(true)} className="logout">Logout</div>
+        <div onClick={() => setLogoutBtn(true)} className="logout"><img src={logout}/><p>Logout</p></div>
         {logoutBtn && logoutPopup()}
       </div>
     </div>

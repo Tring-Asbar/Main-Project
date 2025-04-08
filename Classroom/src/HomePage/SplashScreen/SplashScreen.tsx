@@ -1,5 +1,5 @@
-import React from 'react'
-import katon from '../../assets/Images/KatonImg.svg'
+import katon from '../../assets/Images/KatonImg.svg';
+import './SplashScreen.scss'
 
 const SplashScreen = () => {
   return (

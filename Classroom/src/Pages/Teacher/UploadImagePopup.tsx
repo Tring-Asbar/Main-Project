@@ -1,7 +1,11 @@
 
 const UploadImagePopup = () => {
   return (
-    <></>
+    <>
+    <div className="upload">
+      
+    </div>
+    </>
   )
 }
 

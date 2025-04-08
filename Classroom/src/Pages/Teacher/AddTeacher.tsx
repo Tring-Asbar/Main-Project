@@ -4,11 +4,15 @@ import { useMutation, useLazyQuery } from "@apollo/client";
 import { createTeacher } from "../../graphql/CreateTeacherApi";
 import { teacherById } from "../../graphql/TeacherByIdApi";
 import { updateTeacher } from "../../graphql/UpdateTeacherApi";
+import { DeleteTeacher } from "../../graphql/DeleteTeacherApi";
 import ToastMessage from "../../Components/customComponents/Toast/ToastMessage";
 import User from '../../assets/Images/User.svg';
 import backBtn from '../../assets/Images/Back_btn.svg';
 import { useEffect, useState } from "react";
 import getDecryptedDataWithSecretKey from "../../utils/Decrypt";
+import { GET_PRESIGNED_URL } from "../../graphql/UploadImageApi";
+
+import moment from "moment";
 
 type SubjectType = {
   subject: string;
@@ -31,7 +35,11 @@ type Props = {
 const AddTeacher = ({ setActivePage, selectedTeacherId }: Props) => {
   const [createTeachers] = useMutation(createTeacher);
   const [updateTeachers] = useMutation(updateTeacher);
+  const[deleteTeacherById] = useMutation(DeleteTeacher)
   const [getTeacherById, { data: teacherByIdDetails }] = useLazyQuery(teacherById);
+  const [getUploadPresignedUrl] = useLazyQuery(GET_PRESIGNED_URL,{
+    fetchPolicy:'network-only'
+  });
   const [profileImageURL, setProfileImageURL] = useState<string>(User);
 
   const {
@@ -52,7 +60,7 @@ const AddTeacher = ({ setActivePage, selectedTeacherId }: Props) => {
       ],
       username: "",
       password: "",
-      profileImageURL: "",
+      profileImageURL: profileImageURL || "",
     },
   });
 
@@ -65,6 +73,7 @@ const AddTeacher = ({ setActivePage, selectedTeacherId }: Props) => {
     if (selectedTeacherId) {
       getTeacherById({ variables: { teacherId: selectedTeacherId } });
     }
+    
   }, [selectedTeacherId, getTeacherById]);
 
   useEffect(() => {
@@ -88,21 +97,89 @@ const AddTeacher = ({ setActivePage, selectedTeacherId }: Props) => {
         setValue(`subject.${index}.isPrimary`, subj.isPrimary);
       });
 
-      // Username
       setValue("username", teacher?.userByUId?.uUserName || "");
 
-      // Decrypt password
       const decryptedPass = getDecryptedDataWithSecretKey(teacher?.userByUId?.uUserPassword || "").originalText;
       setValue("password", decryptedPass || "");
     }
   }, [teacherByIdDetails, setValue]);
+
+  const handleUploadtoS3 = async (file: File, setImageURL: (url: string) => void) => {
+    try {
+      const originalName = file.name.substring(0, file.name.lastIndexOf(".")) || file.name;
+      const sanitizedFileName = originalName.replace(/ /g, '_');
+      const lastDotIndex = file.name.lastIndexOf('.');
+      const extension = lastDotIndex !== -1 ? file.name.slice(lastDotIndex) : '';
+  
+      const newFileName = `katon-classroom/images/${sanitizedFileName}-${moment().unix()}${extension}`;
+      console.log(newFileName)
+  
+      const { data } = await getUploadPresignedUrl({ variables: { input: { key: newFileName } } });
+  
+      const preSignedUrl = data?.getUploadPresignedUrl?.preSignedUrl;
+      console.log(preSignedUrl)
+      if (!preSignedUrl) 
+        throw new Error("Failed to get presigned URL");
+  
+      const uploadRes = await fetch(preSignedUrl, {
+        method: "PUT",
+        headers: {
+          "Content-Type": file.type
+        },
+        body: file,
+      });
+  
+      if (uploadRes.ok) {
+        const uploadedURL = `${import.meta.env.VITE_FRONTEND_URL}${newFileName}`;
+        setImageURL(uploadedURL);
+        console.log(uploadedURL) 
+        
+      } else {
+        throw new Error("Upload to S3 failed");
+      }
+    } catch (err) {
+      console.error("Image upload failed", err);
+    }
+  };
+
+  const handleImageUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (file) {
+       handleUploadtoS3(file, setProfileImageURL);
+    }
+  };
+  useEffect(() => {
+    if (profileImageURL) {
+      console.log("profileImageURL updated:", profileImageURL);
+    }
+  }, [profileImageURL]);
+
+  const handleDelete = async () => {
+    try {
+      const res = await deleteTeacherById({
+        variables: {
+          input: {
+            teacherId: teacherByIdDetails?.teacherByTId?.tId,
+          },
+        },
+      });
+
+      if (res?.data?.deleteTeacherById?.message) {
+        ToastMessage({ message: res.data.deleteTeacherById.message, toastType: "success" });
+        setActivePage("all teachers");
+        
+      }
+    } catch (err) {
+      console.error("Delete failed", err);
+      ToastMessage({ message: "Delete failed", toastType: "error" });
+    }
+  }
 
   const onSubmit: SubmitHandler<FormData> = async (data) => {
     const filteredSubjects = data.subject.filter((subj) => subj.subject.trim() !== "");
 
     try {
       if (selectedTeacherId && teacherByIdDetails?.teacherByTId) {
-        // UPDATE logic
         const input = {
           teacherId: teacherByIdDetails.teacherByTId.tId,
           teacherAvatarUrl: profileImageURL !== User ? profileImageURL : "",
@@ -126,7 +203,6 @@ const AddTeacher = ({ setActivePage, selectedTeacherId }: Props) => {
           setActivePage("all teachers");
         }
       } else {
-        // CREATE logic
         const { data: createRes } = await createTeachers({
           variables: {
             input: {
@@ -161,7 +237,7 @@ const AddTeacher = ({ setActivePage, selectedTeacherId }: Props) => {
         <div onClick={() => setActivePage("all teachers")}>
           <img src={backBtn} alt="Back" />
         </div>
-        <div>{selectedTeacherId ? "Edit Teacher" : "Adding Teacher"}</div>
+        <div>{selectedTeacherId ?"Active" : "Adding Teacher"}</div>
         <div></div>
       </div>
 
@@ -178,7 +254,12 @@ const AddTeacher = ({ setActivePage, selectedTeacherId }: Props) => {
             Upload photo <span>+</span>
           </p>
         </button>
-        {/* <input id='fileInput' type="file" accept='image/*' style={{display:'none'}} /> */}
+        <input id='fileInput' type="file" accept='image/*' 
+        {...register("profileImageURL",{
+          required:"Please select the image"
+        })}
+        style={{display:'none'}}  onChange={handleImageUpload}/>
+        {errors.profileImageURL && <p className="err-msg">{errors.profileImageURL.message}</p> }
 
         <div>
           <label htmlFor="name">Name of Teacher</label><br />
@@ -193,7 +274,7 @@ const AddTeacher = ({ setActivePage, selectedTeacherId }: Props) => {
           {errors.name && <p className="err-msg">{errors.name.message}</p>}
         </div>
 
-        <div>
+        <div className="subjects">
           <label htmlFor="subject">Main Subject</label><br />
           {fields.map((field, index) => (
             <div key={field.id} className={index === 0 ? "" : "subject"}>
@@ -220,14 +301,24 @@ const AddTeacher = ({ setActivePage, selectedTeacherId }: Props) => {
             id="username"
             {...register("username", {
               required: "Username is required",
-              minLength: {
-                value: 6,
-                message: "Username should be at least 6 characters",
+              
+              validate:{
+                    startsWithAlphabet: value =>
+                      /^[a-zA-Z]/.test(value) || "Username must start with alphabets",
+                    alphanumeric: value=>
+                      /^[a-zA-Z0-9@._-]+$/.test(value) || "Username must contain alphanumeric characters, '@', '.', '-', and '_'",
+                    consecutiveCharacters: value =>
+                      /(?!.*([@._-])\1\1)/.test(value) || "Username cannot contain more than two consecutive '@', '.', '-', or '_'",
+                    onlyNumbers:value =>
+                      /^(?!\d+$)/.test(value) || "Username cannot be only numbers", 
+                    minLength:value=>
+                      /^.{6,}$/.test(value) || "Username should be at least 6 characters",
+                    maxLength:value=>
+                      /^.{0,50}$/.test(value) || "Username should not exceed 50 characters",
+
               },
-              maxLength: {
-                value: 50,
-                message: "Username should not exceed 50 characters",
-              },
+              
+              
             })}
           />
           {errors.username && (
@@ -258,9 +349,19 @@ const AddTeacher = ({ setActivePage, selectedTeacherId }: Props) => {
         </div>
 
         <div className="buttons">
-          <button type="reset" className="button1">
-            Clear
-          </button>
+        {selectedTeacherId ? (
+            <button
+            type="button"
+              className="button1"
+              onClick={()=>handleDelete()}
+            >
+              Delete
+            </button>
+          ) : (
+            <button type="reset" className="button1">
+              Clear
+            </button>
+          )}
           <button type="submit" className="button2">
             Save
           </button>
