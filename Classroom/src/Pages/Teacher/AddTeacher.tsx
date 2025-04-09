@@ -1,18 +1,21 @@
 import { useForm, SubmitHandler, useFieldArray } from "react-hook-form";
 import './AddTeacher.scss';
 import { useMutation, useLazyQuery } from "@apollo/client";
-import { createTeacher } from "../../graphql/mutation";
-import { teacherById } from "../../graphql/query";
-import { updateTeacher } from "../../graphql/mutation";
-import { DeleteTeacher } from "../../graphql/mutation";
+import { createTeacher , updateTeacher , DeleteTeacher } from "../../graphql/mutation";
+import { teacherById , GET_PRESIGNED_URL } from "../../graphql/query";
 import ToastMessage from "../../Components/customComponents/Toast/ToastMessage";
 import User from '../../assets/Images/User.svg';
 import backBtn from '../../assets/Images/Back_btn.svg';
+import del from '../../assets/Images/delete.gif';
 import { useEffect, useState } from "react";
 import getDecryptedDataWithSecretKey from "../../utils/getDecryptedDataWithSecretKey";
-import { GET_PRESIGNED_URL } from "../../graphql/query";
 import { userNameValidation , passwordValidation } from "./Validation";
+import Button from "../../Components/customComponents/Button/Button";
 import moment from "moment";
+import UploadImagePopup from "./UploadImagePopup";
+import { Dialog } from "@mui/material";
+import '../../Layouts/Dashboard/Sidebar/Sidebar.scss'
+
 
 type SubjectType = {
   subject: string;
@@ -34,6 +37,8 @@ type Props = {
 
 const AddTeacher = ({ setActivePage, selectedTeacherId }: Props) => {
   const allTeachers = "all teachers"
+  const [isOpen,setIsOpen] = useState<boolean>(false)
+  const [deleteButton,setDeleteButton] = useState<Boolean>(false)
   const [createTeachers] = useMutation(createTeacher);
   const [updateTeachers] = useMutation(updateTeacher);
   const[deleteTeacherById] = useMutation(DeleteTeacher)
@@ -55,6 +60,7 @@ const AddTeacher = ({ setActivePage, selectedTeacherId }: Props) => {
       name: "",
       subject: [
         { subject: "", isPrimary: true },
+        { subject: "", isPrimary: false },
         { subject: "", isPrimary: false },
         { subject: "", isPrimary: false },
         { subject: "", isPrimary: false },
@@ -173,12 +179,28 @@ const AddTeacher = ({ setActivePage, selectedTeacherId }: Props) => {
       if (res?.data?.deleteTeacherById?.message) {
         ToastMessage({ message: res.data.deleteTeacherById.message, toastType: "success" });
         setActivePage(allTeachers);
-        
       }
     } catch (err) {
       console.error("Delete failed", err);
       ToastMessage({ message: "Delete failed", toastType: "error" });
     }
+  }
+
+  const DeletePopup = () =>{
+    return(
+      <>
+        <div className="popup">
+          <Dialog open={true} className="dialogMainContainer" >
+            <img src={del} alt="" />
+              <p>Are you sure you want to Delete this teacher?</p>
+            <div className="buttons">
+              <Button className="yes" action="Yes" onClick={()=>handleDelete()}/>
+              <Button className="no" action="No" onClick={()=>setDeleteButton(false)}/>
+            </div>
+          </Dialog>
+        </div>
+      </>
+    )
   }
 
   const onSubmit: SubmitHandler<FormData> = async (data) => {
@@ -231,6 +253,7 @@ const AddTeacher = ({ setActivePage, selectedTeacherId }: Props) => {
           setProfileImageURL(User);
           setActivePage(allTeachers);
         }
+        
       }
     } catch (err) {
       ToastMessage({ message: "Operation failed", toastType: "error" });
@@ -255,12 +278,16 @@ const AddTeacher = ({ setActivePage, selectedTeacherId }: Props) => {
         <button
           type="button"
           onClick={() => document.getElementById("fileInput")?.click()}
+          // onClick={()=>setIsOpen(true)}
           className="file-input"
         >
           <p>
             Upload photo <span>+</span>
           </p>
         </button>
+        {
+          isOpen && <UploadImagePopup/>
+        }
         <input id='fileInput' type="file" accept='image/*' 
         {...register("profileImageURL",{
           required:"Please select the image"
@@ -276,6 +303,7 @@ const AddTeacher = ({ setActivePage, selectedTeacherId }: Props) => {
             id="name"
             {...register("name", {
               required: "Name is required",
+              maxLength:{value:100,message:"Name should not exceed 100 characters"}
             })}
           />
           {errors.name && <p className="err-msg">{errors.name.message}</p>}
@@ -333,22 +361,22 @@ const AddTeacher = ({ setActivePage, selectedTeacherId }: Props) => {
 
         <div className="buttons">
         {selectedTeacherId ? (
-            <button
-            type="button"
+            <Button
+              type="button"
               className="button1"
-              onClick={()=>handleDelete()}
-            >
-              Delete
-            </button>
+              onClick={()=>setDeleteButton(true)}
+              action='Delete'
+            />
+            
           ) : (
-            <button type="reset" className="button1">
-              Clear
-            </button>
+            <Button type="reset" className="button1" action="Clear"/>
+              
           )}
-          <button type="submit" className="button2">
-            Save
-          </button>
+          <Button type="submit" className="button2" action="Save"/>
         </div>
+        {
+          deleteButton && DeletePopup()
+        }
       </form>
     </div>
   );

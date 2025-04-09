@@ -5,6 +5,7 @@ import bg from '../assets/Images/Login-bg.svg'
 import { signIn } from "aws-amplify/auth"
 import ToastMessage from "../Components/customComponents/Toast/ToastMessage"
 import './Login.scss'
+import Button from "../Components/customComponents/Button/Button"
 
 type FormData={
   username : string
@@ -79,7 +80,8 @@ const Login = () => {
               </div>
               <div className="submit">
                 <div></div>
-                <button type="submit" disabled={loading}>Login</button>
+                {/* <button type="submit" disabled={loading}>Login</button> */}
+                <Button type="submit" action='Login' disabled={loading}/>
               </div>
             </form>
           </div>

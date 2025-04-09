@@ -50,6 +50,7 @@
                 p{
                     font-size: 12px;
                     font-weight: 400;
+                    cursor: pointer;
                 }   
             }
             
@@ -86,7 +87,7 @@
             }
             .subjects{
             .subject{
-                display: flex;
+                display: grid;
                 flex-direction: row;
                 justify-content: space-between;
                 margin-top: 15px;

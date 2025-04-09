@@ -1,4 +1,5 @@
 import bg from '../../assets/Images/Landing-image.svg'
+import Button from '../../Components/customComponents/Button/Button'
 import './Content.scss'
 
 const Content = () => {
@@ -12,7 +13,7 @@ const Content = () => {
             <p>Welcome to the 360 Classroom where Teachers, Students and Parents meet to continue the traditional classroom activities.</p>
           </div>
           <div>
-            <button className='btn'>Join Classroom as Student</button>
+            <Button action="Join Classroom as Student" className='btn'/>
           </div>
         </div>
         <div className="section2">

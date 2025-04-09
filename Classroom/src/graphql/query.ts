@@ -69,3 +69,82 @@ export const GET_PRESIGNED_URL = gql`
   }
 `;
 
+export const CURRENT_USER = gql`
+query getCurrentUser {
+  getCurrentUser {
+    nodes {
+      uId
+      uEmailId
+      uRole
+      uFullName
+      uUserName
+      uUserPassword
+      uPhoneNumber
+      uCognitoId
+      schoolAdminsByUId {
+        nodes {
+          saId
+          saName
+          saNotificationEnabled
+          saWebsite
+          saEmailId
+          saDescription
+          saAvatarUrl
+          facilitatorsBySaId{
+            nodes{
+              facId
+            }
+          }
+        }
+      }
+      teachersByUId {
+        nodes {
+          tName
+          tId
+          tAvatarUrl
+          teacherSubjectsByTId(condition: {deletedAt: null}) {
+            nodes {
+              subjectBySjId {
+                sjName
+                sjOriginalName
+                sjId
+              }
+            }
+          }
+        }
+      }
+      studentsByUId {
+        nodes {
+          sId
+          sAvatarUrl
+          studentClassroomsBySId(filter: {isActive: {equalTo: true}}) {
+            nodes {
+              cId
+              classroomByCId {
+                cName
+                cOriginalName
+              }
+            }
+          }
+        }
+      }
+      facilitatorsByUId {
+        nodes {
+          facId
+          facAvatarUrl
+        }
+      }
+    }
+  }
+  schoolAdmin: allSchoolAdmins {
+    nodes {
+      saName
+      saEmailId
+      saDescription
+      saAvatarUrl
+      saWebsite
+      adminType
+    }
+  }
+}
+`;

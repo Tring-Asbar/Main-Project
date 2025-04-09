@@ -11,8 +11,12 @@ import settings from '../../../assets/Images/MenuIcon/settings.svg'
 import help from '../../../assets/Images/MenuIcon/help.svg'
 import logout from '../../../assets/Images/MenuIcon/logout.svg'
 import Logout from '../../../assets/Images/logout.gif'
-import { Dialog,Button } from "@mui/material";
+import { Dialog } from "@mui/material";
 import MenuIcon from '@mui/icons-material/Menu';
+import { useQuery } from "@apollo/client";
+import { CURRENT_USER } from "../../../graphql/query";
+import Button from "../../../Components/customComponents/Button/Button";
+
 
 const Sidebar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -40,23 +44,31 @@ const Sidebar = () => {
   const logoutPopup = () => (
     <div className="popup">
       <Dialog open={true} className="dialogMainContainer" >
-        <img src={Logout} alt="" />
+        <img src={Logout} alt="logout" />
           <p>Are you sure you want to Log Out?</p>
         <div className="buttons">
-          <Button variant="contained" onClick={handleLogout} className="yes">Yes</Button>
-          <Button variant="contained" onClick={() => setLogoutBtn(false)} className="no" color="inherit">No</Button>
+
+          <Button className="yes" action="Yes" onClick={handleLogout}/>
+          <Button className="no" action="No" onClick={() => setLogoutBtn(false)}/>
         </div>
       </Dialog>
     </div>
   );
 
+  const {data} =useQuery(CURRENT_USER)
+
   return (
     <div className={`sidebar-container ${isOpen ? 'open' : ''}`}>
       <div className="sidebar-header">
-        <div className="logo">
-          <img src={KatonSchool} alt="Katon School" />
-          <h4>Katon School</h4>
-        </div>
+        {data?.getCurrentUser?.nodes?.map((user:any)=>(
+          (user?.schoolAdminsByUId?.nodes?.map((school:any)=>(
+            <div className="logo">
+              <img src={KatonSchool} alt="Katon School" />
+              <h4>{school.saName}</h4>
+            </div>
+          )))
+        ))}
+        
         <button className="menu-toggle" onClick={() => setIsOpen(!isOpen)}>
           <MenuIcon />
         </button>

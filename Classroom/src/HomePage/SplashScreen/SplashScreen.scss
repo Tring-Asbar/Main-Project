@@ -7,8 +7,9 @@
     align-items: center;
     background-color: var(--primaryColor);
     height: 100vh;
-    h1,p{
+    h2,p{
         color: var(--background);
+        font-weight: 500;
     }
     p{
         font-size: 8px;

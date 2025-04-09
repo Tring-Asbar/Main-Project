@@ -6,19 +6,9 @@ import { useLocation } from 'react-router-dom';
 import CircularProgress from '@mui/material/CircularProgress'; // Add this
 
 interface Advertisement {
-  id: number;
-  title: { rendered: string };
-  content: { rendered: string };
   Image?: string;
   Screen?: string;
-  acf?: {
-    ad_image?: string;
-  };
-  _embedded?: {
-    'wp:featuredmedia'?: {
-      source_url: string;
-    }[];
-  };
+  
 }
 
 const Advertisement = () => {
@@ -49,7 +39,7 @@ const Advertisement = () => {
   useEffect(() => {
     const fetchAds = async () => {
       try {
-        setLoading(true); // Start loading
+        setLoading(true); 
         const response: AxiosResponse<Advertisement[]> = await axios.get(
           `${import.meta.env.VITE_KATON_CMS_SITE}/class_room_advertisement`,
           {
@@ -62,7 +52,7 @@ const Advertisement = () => {
       } catch (error) {
         console.error('Failed to fetch advertisements:', error);
       } finally {
-        setLoading(false); // Stop loading
+        setLoading(false);
       }
     };
 
@@ -90,6 +80,7 @@ const Advertisement = () => {
       </div>
       <div className="img2">
         {loading ? (
+          
           <div className="loader-container">
             <CircularProgress size={20} />
           </div>

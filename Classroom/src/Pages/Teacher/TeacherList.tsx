@@ -9,7 +9,7 @@ import { debounce } from 'lodash';
 import './AddTeacher.scss';
 import Loader from '../../Loader/Loader';
 import { ArrowLeft, ArrowRight } from 'lucide-react';
-import { CircularProgress } from '@mui/material';
+import Button from '../../Components/customComponents/Button/Button';
 
 const TeacherList = () => {
   const addTeacher = 'add teacher';
@@ -49,7 +49,6 @@ const TeacherList = () => {
     debouncedSearch(searchInput);
   }, [searchInput, debouncedSearch]);
 
-  // Scroll handler
   useEffect(() => {
     const container = scrollRef.current;
     if (!container) return;
@@ -127,7 +126,7 @@ const TeacherList = () => {
                   ))}
                 </div>
                 <div>
-                  <button onClick={() => handleViewTeacher(teacher.teacherId)}>View</button>
+                  <Button onClick={() => handleViewTeacher(teacher.teacherId)} action='View'/>
                 </div>
               </div>
             ))
@@ -135,20 +134,14 @@ const TeacherList = () => {
             <NoDataFound />
           )}
         </div>
-  
-        {/* Pagination Arrows Always Visible */}
         <div className="pagination-controls">
-          <button onClick={handlePrev} disabled={offset === 0 || loading}>
-            <ArrowLeft />
-          </button>
+          <Button onClick={handlePrev} disabled={offset === 0 || loading} className='arrow' action={<ArrowLeft/>}/>
           <span>
             {loading
-              ? "Loading "
+              ? "Loading..."
               : `${offset + 1} - ${Math.min(offset + limit, totalCount)} of ${totalCount}`}
           </span>
-          <button onClick={handleNext} disabled={offset + limit >= totalCount || loading}>
-            <ArrowRight />
-          </button>
+          <Button onClick={handleNext} disabled={offset + limit >= totalCount || loading} className='arrow' action={<ArrowRight/>}/>
         </div>
       </>
     );
@@ -188,11 +181,11 @@ const TeacherList = () => {
             <input type="text" placeholder="Search" value={searchInput} onChange={handleInputChange} />
           </div>
           <div className="add-teacher" onClick={() => add(addTeacher)}>
-            <p>+</p>
+            <Button action="+" className='add'/>
           </div>
         </div>
       )}
-      {navigateContent()}
+      <div>{navigateContent()}</div>
     </div>
   );
 };

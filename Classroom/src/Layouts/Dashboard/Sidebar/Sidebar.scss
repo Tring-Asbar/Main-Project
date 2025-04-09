@@ -11,23 +11,28 @@
     width: 100px;
     height: 100px;
     margin: 0px 80px;
-
   }
   .buttons{
     display: flex;
     justify-content: center;
-    gap: 20px;
+    gap: 10px;
   }
 
   .yes , .no {
     border-radius: 50px;
+    width: 80px;
+    height: 30px;
+    border: none;
+    color: var(--background);
     background-color: var(--primaryColor);
     margin-bottom: 10px;
     text-transform: capitalize !important;
+    cursor: pointer;
   }
 
   .no {
     border-radius: 20px;
+    color: var(--blackColor);
     background-color: var(--box-background);
     text-transform: capitalize !important;
   }
@@ -56,14 +61,14 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 10px;
+    padding: 0px;
     .logo{
         display: flex;
         flex-direction: column;
         gap: 10px;
-        align-items: center;
-        margin-left: 37%;
+        margin-left: 30%;
         justify-content: center;
+        align-items: center;
     }
 
     h4 {
@@ -81,7 +86,6 @@
       display: none;
       background: none;
       border: none;
-      cursor: pointer;
     }
   }
 
@@ -151,7 +155,7 @@
       font-weight: 600;
       font-size: 12px;
       display: flex;
-      gap: 10px;
+      gap: 20px;
 
       &:hover {
         color: var(--primaryColor);
@@ -160,7 +164,6 @@
   }
 }
 
-/* === Responsive Design for Small Devices === */
 @media (max-width: 768px) {
   .sidebar-container {
     width: 100%;
