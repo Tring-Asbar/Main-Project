@@ -26,7 +26,7 @@
     
 }
 
-@media (max-width: 768px) {
+@media (max-width: 1120px) {
     .advertisement-content{
         width: 100%;
         height: 18vh;
@@ -38,8 +38,10 @@
         align-items: flex-start;
         align-self: stretch;
         .img1{
-            max-width: 700vw;
-            height: 100vh;
+           img{
+            width: 100%;
+            height: 200px;
+           }
         }
         .img2 {
         display: none;

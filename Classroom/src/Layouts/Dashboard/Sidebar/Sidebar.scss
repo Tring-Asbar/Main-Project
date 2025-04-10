@@ -91,19 +91,19 @@
 
   .sidebar-section {
     display: flex;
-    justify-content: space-evenly;
+    justify-content: space-around;
     width: 100%;
     margin: 25px 0 0 0;
 
     .section {
       background-color: var(--box-background);
-      width: 118px;
       height: 70px;
+      width: 100px;
       border-radius: 10px;
       display: flex;
       flex-direction: column;
       justify-content: space-around;
-      padding: 0 5px;
+      padding: 0 8px;
       cursor: pointer;
 
       p:first-child {
@@ -146,6 +146,7 @@
         &:hover {
           color: var(--primaryColor);
         }
+        
       }
         
     }
@@ -164,10 +165,9 @@
   }
 }
 
-@media (max-width: 768px) {
+@media (max-width: 1120px) {
   .sidebar-container {
     width: 100%;
-    height: auto;
     gap: 20px;
     padding: 10px;
     position: relative;
@@ -251,7 +251,9 @@
           &:hover {
             color: var(--primaryColor);
           }
+          
         } 
+         
       }
 
       

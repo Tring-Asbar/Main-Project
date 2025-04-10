@@ -8,10 +8,11 @@
     background-color: var(--box-background);
     
 }
-@media (max-width:768px){
+@media (max-width:1120px){
     .dashboard-container{
         background-color: var(--background);
         flex-direction: column;
+        gap: 0;
         .advertisement-content{
             order: 2;
         }
@@ -23,5 +24,6 @@
         }
     }
 }
+
 
 

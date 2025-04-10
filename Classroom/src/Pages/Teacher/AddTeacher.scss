@@ -33,9 +33,11 @@
             border-radius: 20px;
             display: flex;
             flex-direction: column;
+            justify-content: center;
             align-items: center;
             gap: 10px;
             scrollbar-width: thin;
+            
             button{
                 border: none;
                 span{
@@ -58,6 +60,7 @@
                 color: var(--error);
                 font-size: 12px;
                 font-weight: 400;
+                width: 75%;
             }
             .profile{                
                 background-color: var(--background);

@@ -1,5 +1,5 @@
 import './App.scss'
-import { Route, Routes } from 'react-router-dom'
+import { Route,Navigate, Routes } from 'react-router-dom'
 import AuthLayout from './Layouts/Auth/AuthLayout'
 import { publicRoutes } from './Routes/PublicRoutes'
 import { privateRoutes } from './Routes/PrivateRoutes'
@@ -8,22 +8,29 @@ import DashboardLayout from './Layouts/Dashboard/DashboardLayout'
 import Content from './HomePage/Content/Content'
 import ProtectedRoutes from './Routes/ProtectedRoutes'
 import SplashScreen from './HomePage/SplashScreen/SplashScreen'
+import { getAccessTokenFromLocalStorage } from './main'
 
 function App() {
   
+  const isAuthenticated = getAccessTokenFromLocalStorage()
   
   return (
     <Routes>
       <Route path='/' element={<HomePage/>}>
       <Route index element = {<Content/>}/>
-      <Route index element ={<SplashScreen/>}/>
       </Route>
       <Route element = {<AuthLayout/>}>
         {publicRoutes.map((route)=>(
           <Route 
           key={route.path}
           path={route.path}
-          element = {route.element}
+          element = {
+            isAuthenticated && (route.path === "/admin-login" || route.path==='/') ? (
+              <Navigate to='/admin-dashboard' replace /> 
+            ) : (
+              route.element
+            )
+          }
           />
         ))}
       </Route>

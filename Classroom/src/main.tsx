@@ -43,9 +43,11 @@ const authLink = setContext((_: any, { headers }:any) => {
 
 const errorLink = onError(({ graphQLErrors, networkError }) => {
   let shouldLogout = false;
+  console.log('gfgf',shouldLogout)
+
 
   if (graphQLErrors) {
-    for (let err of graphQLErrors) {
+    for (const err of graphQLErrors) {
       if (err.extensions?.code === 'UNAUTHENTICATED') {
         shouldLogout = true;
         break;
@@ -56,7 +58,7 @@ const errorLink = onError(({ graphQLErrors, networkError }) => {
   if (networkError && 'statusCode' in networkError && networkError.statusCode === 401) {
     shouldLogout = true;
   }
-
+  console.log('gfgf',shouldLogout)
   if (shouldLogout) {
     localStorage.clear();
     ToastMessage({message:"Session expired. Please log in again.",toastType:'error'})

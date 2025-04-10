@@ -21,6 +21,7 @@ import Button from "../../../Components/customComponents/Button/Button";
 const Sidebar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [logoutBtn, setLogoutBtn] = useState(false);
+  const [isActive,setIsActive] = useState<boolean>(false)
   const navigate = useNavigate();
 
   const sidebarMenu = [
@@ -60,14 +61,14 @@ const Sidebar = () => {
   return (
     <div className={`sidebar-container ${isOpen ? 'open' : ''}`}>
       <div className="sidebar-header">
-        {data?.getCurrentUser?.nodes?.map((user:any)=>(
+        {data?.getCurrentUser?.nodes?.map((user:any)=>
           (user?.schoolAdminsByUId?.nodes?.map((school:any)=>(
             <div className="logo">
               <img src={KatonSchool} alt="Katon School" />
               <h4>{school.saName}</h4>
             </div>
           )))
-        ))}
+        )}
         
         <button className="menu-toggle" onClick={() => setIsOpen(!isOpen)}>
           <MenuIcon />
@@ -89,7 +90,7 @@ const Sidebar = () => {
         {sidebarMenu.map((menu) => (
           <div key={menu.path} className="menu">
             <img src={menu.icon} alt="icon"/>
-            <Link to={menu.path}>{menu.label}</Link>
+            <Link to={menu.path} className={isActive ? "active" : ""} onClick={()=>setIsActive(true)}>{menu.label}</Link>
           </div>
         ))}
         <div onClick={() => setLogoutBtn(true)} className="logout"><img src={logout}/><p>Logout</p></div>

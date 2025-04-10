@@ -5,39 +5,27 @@ import Footer from "../../HomePage/Footer/Footer";
 import SplashScreen from "../../HomePage/SplashScreen/SplashScreen";
 
 const AuthLayout = () => {
-  const [showSplash, setShowSplash] = useState(false);
+  const [hasLoaded, setHasLoaded] = useState(false);
 
   useEffect(() => {
-    const hasSeenSplash = localStorage.getItem("hasSeenSplash");
+    const timer = setTimeout(() => {
+      setHasLoaded(true);
+    }, 500);
 
-    if (!hasSeenSplash) {
-      setShowSplash(true);
-      const timer = setTimeout(() => {
-        setShowSplash(false);
-        localStorage.setItem("hasSeenSplash", "true"); 
-      }, 1000);
-
-      return () => clearTimeout(timer);
-    }
-  }, []);
-
-  if (showSplash) {
-    
-    return (
-      <div className="splash-screen">
-        <SplashScreen />
-        
-      </div>
-    );
-  }
-  {localStorage.removeItem("hasSeenSplash")}
+    return () => clearTimeout(timer);
+  }); 
 
   return (
     <>
-    {localStorage.removeItem("hasSeenSplash")}
-      <Header />
-      <Outlet />
-      <Footer />
+      {!hasLoaded ? (
+        <SplashScreen />
+      ) : (
+        <>
+          <Header />
+          <Outlet />
+          <Footer />
+        </>
+      )}
     </>
   );
 };

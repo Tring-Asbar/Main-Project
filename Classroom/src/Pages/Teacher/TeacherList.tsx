@@ -1,7 +1,7 @@
 import { useQuery } from '@apollo/client';
 import './TeacherList.scss';
 import { teachersList } from '../../graphql/query';
-import { useState, useEffect, useCallback, useRef } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import AddTeacher from './AddTeacher';
 import NoDataFound from '../../NoDataFound/NoDataFound';
 import User from '../../assets/Images/User.svg';
@@ -18,16 +18,16 @@ const TeacherList = () => {
   const [selectedTeacherId, setSelectedTeacherId] = useState<string | null>(null);
   const [offset, setOffset] = useState(0);
   const limit = 10;
-  const scrollRef = useRef<HTMLDivElement>(null);
 
   const { data, loading, error, refetch } = useQuery(teachersList, {
     variables: {
-      searchInput: `%${searchInput}%`,
+      searchInput: '%%', // Initial value to prevent firing on every key stroke
       orderBy: ['T_NAME_ASC'],
       limit,
       offset,
     },
     fetchPolicy: 'network-only',
+    notifyOnNetworkStatusChange: true,
   });
 
   const totalCount = data?.allTeachers?.totalCount || 0;
@@ -48,37 +48,6 @@ const TeacherList = () => {
   useEffect(() => {
     debouncedSearch(searchInput);
   }, [searchInput, debouncedSearch]);
-
-  useEffect(() => {
-    const container = scrollRef.current;
-    if (!container) return;
-
-    const handleScroll = () => {
-      const { scrollTop, scrollHeight, clientHeight } = container;
-
-      const atTop = scrollTop === 0;
-      const atBottom = scrollTop + clientHeight >= scrollHeight - 1;
-
-      if (atBottom && offset + limit < totalCount) {
-        setOffset((prev) => {
-          const newOffset = prev + limit;
-          refetch({ searchInput: `%${searchInput}%`, orderBy: ['T_NAME_ASC'], limit, offset: newOffset });
-          return newOffset;
-        });
-      }
-
-      if (atTop && offset - limit >= 0) {
-        setOffset((prev) => {
-          const newOffset = prev - limit;
-          refetch({ searchInput: `%${searchInput}%`, orderBy: ['T_NAME_ASC'], limit, offset: newOffset });
-          return newOffset;
-        });
-      }
-    };
-
-    container.addEventListener('scroll', handleScroll);
-    return () => container.removeEventListener('scroll', handleScroll);
-  }, [offset, refetch, totalCount, searchInput]);
 
   const handleViewTeacher = (teacherId: string) => {
     setSelectedTeacherId(teacherId);
@@ -103,12 +72,12 @@ const TeacherList = () => {
 
   const allTeachers = () => {
     const teachers = data?.allTeachers?.nodes ?? [];
-  
     return (
       <>
-        <div className="teacher-content" ref={scrollRef}>
+        <div className="teacher-content">
+        
           {loading ? (
-            <div><Loader /></div>
+            <div><Loader/></div>
           ) : error ? (
             <div className="load-err">Error</div>
           ) : teachers.length > 0 ? (
@@ -121,12 +90,12 @@ const TeacherList = () => {
                   <h5>{teacher.teacherName}</h5>
                   {teacher?.mainSubject?.nodes?.map((subject: any) => (
                     <div key={subject?.subjectBySjId?.subjectOriginalName}>
-                      <p>{subject?.subjectBySjId?.subjectOriginalName} Teacher</p>
+                      <p>{subject?.subjectBySjId?.subjectOriginalName ?? "Null"} Teacher</p>
                     </div>
                   ))}
                 </div>
                 <div>
-                  <Button onClick={() => handleViewTeacher(teacher.teacherId)} action='View'/>
+                  <Button onClick={() => handleViewTeacher(teacher.teacherId)} action='View' />
                 </div>
               </div>
             ))
@@ -135,23 +104,29 @@ const TeacherList = () => {
           )}
         </div>
         <div className="pagination-controls">
-          <Button onClick={handlePrev} disabled={offset === 0 || loading} className='arrow' action={<ArrowLeft/>}/>
+          <Button onClick={handlePrev} disabled={offset === 0 || loading} className='arrow' action={<ArrowLeft />} />
           <span>
             {loading
               ? "Loading..."
               : `${offset + 1} - ${Math.min(offset + limit, totalCount)} of ${totalCount}`}
           </span>
-          <Button onClick={handleNext} disabled={offset + limit >= totalCount || loading} className='arrow' action={<ArrowRight/>}/>
+          <Button onClick={handleNext} disabled={offset + limit >= totalCount || loading} className='arrow' action={<ArrowRight />} />
         </div>
       </>
     );
   };
-  
 
   const navigateContent = () => {
     switch (activePage) {
       case 'add teacher':
-        return <AddTeacher setActivePage={setActivePage} selectedTeacherId={selectedTeacherId} />;
+        return <AddTeacher setActivePage={setActivePage} selectedTeacherId={selectedTeacherId} 
+        refetchTeachers={() => refetch({ 
+          searchInput: `%${searchInput}%`, 
+          orderBy: ['T_NAME_ASC'], 
+          limit, 
+          offset 
+        })}
+        />;
       default:
         return allTeachers();
     }
@@ -168,6 +143,7 @@ const TeacherList = () => {
 
   return (
     <div className="teacher-container">
+      
       {activePage !== addTeacher && (
         <div className="teacher-header">
           <div className="all-teacher" onClick={() => setActivePage('all teachers')}>
@@ -181,7 +157,7 @@ const TeacherList = () => {
             <input type="text" placeholder="Search" value={searchInput} onChange={handleInputChange} />
           </div>
           <div className="add-teacher" onClick={() => add(addTeacher)}>
-            <Button action="+" className='add'/>
+            <Button action="+" className='add' />
           </div>
         </div>
       )}

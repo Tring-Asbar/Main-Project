@@ -8,7 +8,7 @@ type ProtectedRoutesProps = {
 const ProtectedRoutes:React.FC<ProtectedRoutesProps> = ({children}) => {
     const isAuthenticated = getAccessTokenFromLocalStorage();
   return (
-    isAuthenticated?children:<Navigate to="/admin-login" />
+    !isAuthenticated?<Navigate to="/admin-login" />:children
   )
 }
 

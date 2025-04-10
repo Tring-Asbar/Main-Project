@@ -15,7 +15,8 @@ import moment from "moment";
 import UploadImagePopup from "./UploadImagePopup";
 import { Dialog } from "@mui/material";
 import '../../Layouts/Dashboard/Sidebar/Sidebar.scss'
-
+import VisibilityIcon from '@mui/icons-material/Visibility';
+import { EyeOff } from "lucide-react";
 
 type SubjectType = {
   subject: string;
@@ -33,12 +34,13 @@ type FormData = {
 type Props = {
   setActivePage: (page: string) => void;
   selectedTeacherId?: string|null;
+  refetchTeachers: () => void;
 };
 
-const AddTeacher = ({ setActivePage, selectedTeacherId }: Props) => {
+const AddTeacher = ({ setActivePage, selectedTeacherId,refetchTeachers }: Props) => {
   const allTeachers = "all teachers"
   const [isOpen,setIsOpen] = useState<boolean>(false)
-  const [deleteButton,setDeleteButton] = useState<Boolean>(false)
+  const [deleteButton,setDeleteButton] = useState<boolean>(false)
   const [createTeachers] = useMutation(createTeacher);
   const [updateTeachers] = useMutation(updateTeacher);
   const[deleteTeacherById] = useMutation(DeleteTeacher)
@@ -228,6 +230,7 @@ const AddTeacher = ({ setActivePage, selectedTeacherId }: Props) => {
 
         if (updateRes) {
           ToastMessage({ message: "Teacher updated successfully", toastType: "success" });
+          refetchTeachers();
           setActivePage(allTeachers);
           
         }
@@ -251,6 +254,7 @@ const AddTeacher = ({ setActivePage, selectedTeacherId }: Props) => {
           ToastMessage({ message: "Registration success", toastType: "success" });
           reset();
           setProfileImageURL(User);
+          refetchTeachers();
           setActivePage(allTeachers);
         }
         
@@ -289,9 +293,7 @@ const AddTeacher = ({ setActivePage, selectedTeacherId }: Props) => {
           isOpen && <UploadImagePopup/>
         }
         <input id='fileInput' type="file" accept='image/*' 
-        {...register("profileImageURL",{
-          required:"Please select the image"
-        })}
+        {...register("profileImageURL",)}
         style={{display:'none'}}  onChange={handleImageUpload}/>
         {errors.profileImageURL && <p className="err-msg">{errors.profileImageURL.message}</p> }
 
@@ -349,6 +351,7 @@ const AddTeacher = ({ setActivePage, selectedTeacherId }: Props) => {
             type="password"
             placeholder="Password"
             id="password"
+            
             {...register("password", {
               required: "Password is required",
               validate:passwordValidation
@@ -370,7 +373,6 @@ const AddTeacher = ({ setActivePage, selectedTeacherId }: Props) => {
             
           ) : (
             <Button type="reset" className="button1" action="Clear"/>
-              
           )}
           <Button type="submit" className="button2" action="Save"/>
         </div>
