@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testExecutions version="1">
+  <file path="P:\VS CODE\Main-Project\Classroom\src\Components\customComponents\Button\__tests__\Button.test.tsx">
+    <testCase name="Button Component renders with text content" duration="36"/>
+    <testCase name="Button Component calls onClick handler when clicked" duration="8"/>
+    <testCase name="Button Component is disabled when disabled prop is true" duration="7"/>
+    <testCase name="Button Component applies the correct className" duration="5"/>
+    <testCase name="Button Component renders a ReactNode in action" duration="3"/>
+    <testCase name="Button Component uses the correct button type" duration="3"/>
+  </file>
+  <file path="P:\VS CODE\Main-Project\Classroom\src\Components\customComponents\Toast\__tests__\Toast.test.tsx">
+    <testCase name="ToastMessage calls toast with correct message and options" duration="1"/>
+  </file>
+  <file path="P:\VS CODE\Main-Project\Classroom\src\Loader\__tests__\Loader.test.tsx">
+  </file>
+</testExecutions>

@@ -80,7 +80,6 @@ const Login = () => {
               </div>
               <div className="submit">
                 <div></div>
-                {/* <button type="submit" disabled={loading}>Login</button> */}
                 <Button type="submit" action='Login' disabled={loading}/>
               </div>
             </form>

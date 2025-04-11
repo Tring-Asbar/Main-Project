@@ -16,13 +16,14 @@ type FormData = {
   description: string
   username: string
   password: string
+  avatar:string
 }
 
 const CustomizeSchool = () => {
   const [isEditing, setIsEditing] = useState(false)
   const [updateSchoolAdminDetails] = useMutation(UPDATE_SCHOOL)
   const { data , refetch} = useQuery(CURRENT_USER)
-
+  const [avatar,setAvatar] = useState(null)
   const { register, handleSubmit, reset } = useForm<FormData>()
 
   useEffect(() => {
@@ -36,7 +37,8 @@ const CustomizeSchool = () => {
         website: schoolAdmin?.saWebsite ?? '',
         description: schoolAdmin?.saDescription ?? '',
         username: user?.uUserName ?? '',
-        password: getDecryptedDataWithSecretKey(user?.uUserPassword ?? '').originalText
+        password: getDecryptedDataWithSecretKey(user?.uUserPassword ?? '').originalText,
+        avatar : schoolAdmin?.saAvatarUrl
       })
     }
   }, [data, reset])
@@ -47,7 +49,7 @@ const CustomizeSchool = () => {
       emailId: formData.email.trim(),
       website: formData.website.trim(),
       description: formData.description === '' ? null : formData.description.trim(),
-      schoolAvatarFileName: null
+      schoolAvatarFileName: formData.avatar || '',
     }
 
     try {
@@ -77,12 +79,12 @@ const CustomizeSchool = () => {
         <button
           type="button"
           onClick={() => document.getElementById('fileInput')?.click()}
-          className={isEditing?"file-input":'readOnly'}
+          className="file-input"
           disabled={!isEditing}
         >
           <p>Add Profile Logo  <span>+</span></p>
         </button>
-
+        <input id='fileInput' type="file" accept='image/*' {...register('avatar')}/>
         <div>
           <label htmlFor="schoolname">Name of School</label><br />
           <input type="text" id="schoolname" className={isEditing?"field  ":'readOnly'} readOnly={!isEditing} {...register('schoolname', { required: 'Name is required' })} />
