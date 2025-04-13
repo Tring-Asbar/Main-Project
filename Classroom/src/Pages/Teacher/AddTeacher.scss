@@ -37,6 +37,10 @@
             align-items: center;
             gap: 10px;
             scrollbar-width: thin;
+
+            .img-upload{
+                display: none;
+            }
             
             button{
                 border: none;

@@ -48,28 +48,25 @@ const errorLink = onError(({ graphQLErrors, networkError }) => {
 
   if (graphQLErrors) {
     for (const err of graphQLErrors) {
-      if (err.extensions?.code === 'UNAUTHENTICATED') {
+      if (err.message.includes('jwt expired')) {
         shouldLogout = true;
         break;
       }
     }
   }
 
-  if (networkError && 'statusCode' in networkError && networkError.statusCode === 401) {
-    shouldLogout = true;
-  }
   console.log('gfgf',shouldLogout)
   if (shouldLogout) {
     localStorage.clear();
     ToastMessage({message:"Session expired. Please log in again.",toastType:'error'})
     setTimeout(() => {
       window.location.href = '/admin-login';
-    }, 3000); 
+    }, 2000);
   }
 });
 
 const client = new ApolloClient({
-  link: from([authLink,httpLink,errorLink]),
+  link: from([errorLink,authLink,httpLink]),
   cache:new InMemoryCache(),
 });
 

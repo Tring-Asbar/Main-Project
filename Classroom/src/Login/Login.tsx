@@ -34,7 +34,6 @@ const Login = () => {
         username,
         password
       })
-      localStorage.setItem('loginpage',username)
       navigate('/admin-dashboard')
     }
     catch(err){

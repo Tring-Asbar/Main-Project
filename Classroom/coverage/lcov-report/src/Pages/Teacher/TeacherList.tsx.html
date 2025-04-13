@@ -25,28 +25,28 @@
             <div class='fl pad1y space-right2'>
                 <span class="strong">0% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>0/72</span>
+                <span class='fraction'>0/71</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
                 <span class="strong">0% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>0/88</span>
+                <span class='fraction'>0/89</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
                 <span class="strong">0% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>0/17</span>
+                <span class='fraction'>0/16</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
                 <span class="strong">0% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>0/60</span>
+                <span class='fraction'>0/59</span>
             </div>
         
             
@@ -230,9 +230,7 @@
 <a name='L165'></a><a href='#L165'>165</a>
 <a name='L166'></a><a href='#L166'>166</a>
 <a name='L167'></a><a href='#L167'>167</a>
-<a name='L168'></a><a href='#L168'>168</a>
-<a name='L169'></a><a href='#L169'>169</a>
-<a name='L170'></a><a href='#L170'>170</a></td><td class="line-coverage quiet"><span class="cline-any cline-no">&nbsp;</span>
+<a name='L168'></a><a href='#L168'>168</a></td><td class="line-coverage quiet"><span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
@@ -294,9 +292,6 @@
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
@@ -307,6 +302,7 @@
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -457,17 +453,14 @@ const TeacherList = <span class="cstat-no" title="statement not covered" ><span 
 <span class="cstat-no" title="statement not covered" >    setActivePage(addTeacher);</span>
   };
 &nbsp;
-  const handlePrev = <span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >() =&gt; {</span></span>
-<span class="cstat-no" title="statement not covered" >    <span class="missing-if-branch" title="if path not taken" >I</span>if (offset - limit &gt;= 0) {</span>
-      const newOffset = <span class="cstat-no" title="statement not covered" >offset - limit;</span>
+  const handlePagination = <span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >() =&gt; {</span></span>
+<span class="cstat-no" title="statement not covered" >    if (offset + limit &lt; totalCount) {</span>
+      const newOffset = <span class="cstat-no" title="statement not covered" >offset + limit;</span>
 <span class="cstat-no" title="statement not covered" >      setOffset(newOffset);</span>
 <span class="cstat-no" title="statement not covered" >      refetch({ searchInput: `%${searchInput}%`, orderBy: ['T_NAME_ASC'], limit, offset: newOffset });</span>
     }
-  };
-&nbsp;
-  const handleNext = <span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >() =&gt; {</span></span>
-<span class="cstat-no" title="statement not covered" >    <span class="missing-if-branch" title="if path not taken" >I</span>if (offset + limit &lt; totalCount) {</span>
-      const newOffset = <span class="cstat-no" title="statement not covered" >offset + limit;</span>
+    else <span class="cstat-no" title="statement not covered" ><span class="missing-if-branch" title="if path not taken" >I</span>if (offset - limit &gt;= 0) {</span>
+      const newOffset = <span class="cstat-no" title="statement not covered" >offset - limit;</span>
 <span class="cstat-no" title="statement not covered" >      setOffset(newOffset);</span>
 <span class="cstat-no" title="statement not covered" >      refetch({ searchInput: `%${searchInput}%`, orderBy: ['T_NAME_ASC'], limit, offset: newOffset });</span>
     }
@@ -483,6 +476,7 @@ const TeacherList = <span class="cstat-no" title="statement not covered" ><span 
             &lt;div&gt;&lt;Loader/&gt;&lt;/div&gt;
           ) : error ? (
             &lt;div className="load-err"&gt;Error&lt;/div&gt;
+            
           ) : teachers.length &gt; 0 ? (
             teachers.map(<span class="fstat-no" title="function not covered" >(t</span>eacher: any) =&gt; <span class="cstat-no" title="statement not covered" >(</span>
               &lt;div className="details" key={teacher.teacherId} onClick={<span class="fstat-no" title="function not covered" >() =&gt; <span class="cstat-no" title="statement not covered" >h</span>andleViewTeacher(teacher.teacherId)}&gt;</span>
@@ -507,13 +501,13 @@ const TeacherList = <span class="cstat-no" title="statement not covered" ><span 
           )}
         &lt;/div&gt;
         &lt;div className="pagination-controls"&gt;
-          &lt;Button onClick={handlePrev} disabled={offset === 0 || loading} className='arrow' action={&lt;ArrowLeft /&gt;} /&gt;
+          &lt;Button onClick={handlePagination} disabled={offset === 0 || loading} className='arrow' action={&lt;ArrowLeft /&gt;} /&gt;
           &lt;span&gt;
             {loading
               ? "Loading..."
               : `${offset + 1} - ${Math.min(offset + limit, totalCount)} of ${totalCount}`}
           &lt;/span&gt;
-          &lt;Button onClick={handleNext} disabled={offset + limit &gt;= totalCount || loading} className='arrow' action={&lt;ArrowRight /&gt;} /&gt;
+          &lt;Button onClick={handlePagination} disabled={offset + limit &gt;= totalCount || loading} className='arrow' action={&lt;ArrowRight /&gt;} /&gt;
         &lt;/div&gt;
       &lt;/&gt;
     );
@@ -577,7 +571,7 @@ const TeacherList = <span class="cstat-no" title="statement not covered" ><span 
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2025-04-11T09:00:06.693Z
+                at 2025-04-13T16:09:43.841Z
             </div>
         <script src="../../../prettify.js"></script>
         <script>

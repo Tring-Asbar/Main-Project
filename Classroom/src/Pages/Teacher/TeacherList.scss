@@ -124,9 +124,9 @@
             background-color:var(--background);
             color: var(--primaryColor);
         }
-    }
+    }   
 }
-@media (max-width:1120px){
+@media (max-width:768px){
     .teacher-container{
         .teacher-header{
             gap: 200px;

@@ -54,17 +54,14 @@ const TeacherList = () => {
     setActivePage(addTeacher);
   };
 
-  const handlePrev = () => {
-    if (offset - limit >= 0) {
-      const newOffset = offset - limit;
+  const handlePagination = () => {
+    if (offset + limit < totalCount) {
+      const newOffset = offset + limit;
       setOffset(newOffset);
       refetch({ searchInput: `%${searchInput}%`, orderBy: ['T_NAME_ASC'], limit, offset: newOffset });
     }
-  };
-
-  const handleNext = () => {
-    if (offset + limit < totalCount) {
-      const newOffset = offset + limit;
+    else if (offset - limit >= 0) {
+      const newOffset = offset - limit;
       setOffset(newOffset);
       refetch({ searchInput: `%${searchInput}%`, orderBy: ['T_NAME_ASC'], limit, offset: newOffset });
     }
@@ -80,6 +77,7 @@ const TeacherList = () => {
             <div><Loader/></div>
           ) : error ? (
             <div className="load-err">Error</div>
+            
           ) : teachers.length > 0 ? (
             teachers.map((teacher: any) => (
               <div className="details" key={teacher.teacherId} onClick={() => handleViewTeacher(teacher.teacherId)}>
@@ -104,13 +102,13 @@ const TeacherList = () => {
           )}
         </div>
         <div className="pagination-controls">
-          <Button onClick={handlePrev} disabled={offset === 0 || loading} className='arrow' action={<ArrowLeft />} />
+          <Button onClick={handlePagination} disabled={offset === 0 || loading} className='arrow' action={<ArrowLeft />} />
           <span>
             {loading
               ? "Loading..."
               : `${offset + 1} - ${Math.min(offset + limit, totalCount)} of ${totalCount}`}
           </span>
-          <Button onClick={handleNext} disabled={offset + limit >= totalCount || loading} className='arrow' action={<ArrowRight />} />
+          <Button onClick={handlePagination} disabled={offset + limit >= totalCount || loading} className='arrow' action={<ArrowRight />} />
         </div>
       </>
     );

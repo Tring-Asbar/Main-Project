@@ -25,14 +25,14 @@
             <div class='fl pad1y space-right2'>
                 <span class="strong">0% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>0/41</span>
+                <span class='fraction'>0/44</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
                 <span class="strong">0% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>0/73</span>
+                <span class='fraction'>0/77</span>
             </div>
         
             
@@ -46,7 +46,7 @@
             <div class='fl pad1y space-right2'>
                 <span class="strong">0% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>0/32</span>
+                <span class='fraction'>0/33</span>
             </div>
         
             
@@ -195,7 +195,9 @@
 <a name='L130'></a><a href='#L130'>130</a>
 <a name='L131'></a><a href='#L131'>131</a>
 <a name='L132'></a><a href='#L132'>132</a>
-<a name='L133'></a><a href='#L133'>133</a></td><td class="line-coverage quiet"><span class="cline-any cline-no">&nbsp;</span>
+<a name='L133'></a><a href='#L133'>133</a>
+<a name='L134'></a><a href='#L134'>134</a>
+<a name='L135'></a><a href='#L135'>135</a></td><td class="line-coverage quiet"><span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
@@ -215,6 +217,14 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
@@ -222,12 +232,6 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -330,7 +334,7 @@
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js"><span class="cstat-no" title="statement not covered" >import { useForm } from 'react-hook-form'</span>
 <span class="cstat-no" title="statement not covered" >import { useEffect, useState } from 'react'</span>
 <span class="cstat-no" title="statement not covered" >import { useMutation, useQuery } from '@apollo/client'</span>
-<span class="cstat-no" title="statement not covered" >import { UPDATE_SCHOOL } from '../../graphql/UpdateSchoolApi'</span>
+<span class="cstat-no" title="statement not covered" >import { UPDATE_SCHOOL } from '../../graphql/mutation'</span>
 <span class="cstat-no" title="statement not covered" >import { CURRENT_USER } from '../../graphql/query'</span>
 <span class="cstat-no" title="statement not covered" >import KatonSchool from '../../assets/Images/Katon.svg'</span>
 <span class="cstat-no" title="statement not covered" >import './CustomizeSchool.scss'</span>
@@ -345,13 +349,14 @@ type FormData = {
   description: string
   username: string
   password: string
+  avatar:string
 }
 &nbsp;
 const CustomizeSchool = <span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >() =&gt; {</span></span>
   const [isEditing<span class="cstat-no" title="statement not covered" >, s</span>etIsEditing<span class="cstat-no" title="statement not covered" >] = <span class="cstat-no" title="statement not covered" >u</span>seState(false)</span>
   const [updateSchoolAdminDetails] = <span class="cstat-no" title="statement not covered" >useMutation(UPDATE_SCHOOL)</span>
   const { data<span class="cstat-no" title="statement not covered" > , r</span>efetch<span class="cstat-no" title="statement not covered" >} = <span class="cstat-no" title="statement not covered" >u</span>seQuery(CURRENT_USER)</span>
-&nbsp;
+  const [avatar<span class="cstat-no" title="statement not covered" >,s</span>etAvatar<span class="cstat-no" title="statement not covered" >] = <span class="cstat-no" title="statement not covered" >u</span>seState(null)</span>
   const { register<span class="cstat-no" title="statement not covered" >, h</span>andleSubmit<span class="cstat-no" title="statement not covered" >, r</span>eset<span class="cstat-no" title="statement not covered" > } = <span class="cstat-no" title="statement not covered" >u</span>seForm&lt;FormData&gt;()</span>
 &nbsp;
 <span class="cstat-no" title="statement not covered" >  useEffect(<span class="fstat-no" title="function not covered" >() =&gt; {</span></span>
@@ -365,7 +370,8 @@ const CustomizeSchool = <span class="cstat-no" title="statement not covered" ><s
         website: schoolAdmin?.saWebsite ?? '',
         description: schoolAdmin?.saDescription ?? '',
         username: user?.uUserName ?? '',
-        password: getDecryptedDataWithSecretKey(user?.uUserPassword ?? '').originalText
+        password: getDecryptedDataWithSecretKey(user?.uUserPassword ?? '').originalText,
+        avatar : schoolAdmin?.saAvatarUrl
       })
     }
   }, [data, reset])
@@ -376,7 +382,7 @@ const CustomizeSchool = <span class="cstat-no" title="statement not covered" ><s
       emailId: formData.email.trim(),
       website: formData.website.trim(),
       description: formData.description === '' ? null : formData.description.trim(),
-      schoolAvatarFileName: null
+      schoolAvatarFileName: formData.avatar || '',
     }
 &nbsp;
     try {
@@ -406,12 +412,12 @@ const CustomizeSchool = <span class="cstat-no" title="statement not covered" ><s
         &lt;button
           type="button"
           onClick={<span class="fstat-no" title="function not covered" >() =&gt; <span class="cstat-no" title="statement not covered" >d</span>ocument.getElementById('fileInput')?.click()}</span>
-          className={isEditing?"file-input":'readOnly'}
+          className="file-input"
           disabled={!isEditing}
         &gt;
           &lt;p&gt;Add Profile Logo  &lt;span&gt;+&lt;/span&gt;&lt;/p&gt;
         &lt;/button&gt;
-&nbsp;
+        &lt;input id='fileInput' type="file" accept='image/*' {...register('avatar')}/&gt;
         &lt;div&gt;
           &lt;label htmlFor="schoolname"&gt;Name of School&lt;/label&gt;&lt;br /&gt;
           &lt;input type="text" id="schoolname" className={isEditing?"field  ":'readOnly'} readOnly={!isEditing} {...register('schoolname', { required: 'Name is required' })} /&gt;
@@ -466,7 +472,7 @@ const CustomizeSchool = <span class="cstat-no" title="statement not covered" ><s
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2025-04-11T09:00:06.693Z
+                at 2025-04-13T16:09:43.841Z
             </div>
         <script src="../../../prettify.js"></script>
         <script>

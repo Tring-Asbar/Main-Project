@@ -1,7 +1,7 @@
 import { useForm } from 'react-hook-form'
 import { useEffect, useState } from 'react'
 import { useMutation, useQuery } from '@apollo/client'
-import { UPDATE_SCHOOL } from '../../graphql/UpdateSchoolApi'
+import { UPDATE_SCHOOL } from '../../graphql/mutation'
 import { CURRENT_USER } from '../../graphql/query'
 import KatonSchool from '../../assets/Images/Katon.svg'
 import './CustomizeSchool.scss'

@@ -31,12 +31,3 @@ export const UPDATE_SCHOOL = gql`
     }
   }
 `;
-
-export const GET_PRESIGNED_URL = gql`
-  query getPresignedUrl($input: preSignedUrlInput!) {
-    getUploadPresignedUrl(input: $input) {
-      preSignedUrl
-      region
-    }
-  }
-`;

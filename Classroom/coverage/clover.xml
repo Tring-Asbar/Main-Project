@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1744362006761" clover="3.2.0">
-  <project timestamp="1744362006761" name="All files">
-    <metrics statements="554" coveredstatements="7" conditionals="450" coveredconditionals="0" methods="120" coveredmethods="2" elements="1124" coveredelements="9" complexity="0" loc="554" ncloc="554" packages="26" files="39" classes="39"/>
+<coverage generated="1744560583924" clover="3.2.0">
+  <project timestamp="1744560583924" name="All files">
+    <metrics statements="542" coveredstatements="7" conditionals="442" coveredconditionals="0" methods="117" coveredmethods="2" elements="1101" coveredelements="9" complexity="0" loc="542" ncloc="542" packages="25" files="37" classes="37"/>
     <package name="src">
-      <metrics statements="56" coveredstatements="0" conditionals="20" coveredconditionals="0" methods="8" coveredmethods="0"/>
+      <metrics statements="54" coveredstatements="0" conditionals="12" coveredconditionals="0" methods="8" coveredmethods="0"/>
       <file name="App.tsx" path="P:\VS CODE\Main-Project\Classroom\src\App.tsx">
         <metrics statements="15" coveredstatements="0" conditionals="5" coveredconditionals="0" methods="3" coveredmethods="0"/>
         <line num="1" count="0" type="stmt"/>
@@ -23,7 +23,7 @@
         <line num="55" count="0" type="stmt"/>
       </file>
       <file name="main.tsx" path="P:\VS CODE\Main-Project\Classroom\src\main.tsx">
-        <metrics statements="41" coveredstatements="0" conditionals="15" coveredconditionals="0" methods="5" coveredmethods="0"/>
+        <metrics statements="39" coveredstatements="0" conditionals="7" coveredconditionals="0" methods="5" coveredmethods="0"/>
         <line num="1" count="0" type="stmt"/>
         <line num="2" count="0" type="stmt"/>
         <line num="3" count="0" type="stmt"/>
@@ -52,19 +52,17 @@
         <line num="46" count="0" type="stmt"/>
         <line num="49" count="0" type="cond" truecount="0" falsecount="1"/>
         <line num="50" count="0" type="stmt"/>
-        <line num="51" count="0" type="cond" truecount="0" falsecount="5"/>
+        <line num="51" count="0" type="cond" truecount="0" falsecount="1"/>
         <line num="52" count="0" type="stmt"/>
         <line num="53" count="0" type="stmt"/>
-        <line num="58" count="0" type="cond" truecount="0" falsecount="4"/>
-        <line num="59" count="0" type="stmt"/>
+        <line num="58" count="0" type="stmt"/>
+        <line num="59" count="0" type="cond" truecount="0" falsecount="1"/>
+        <line num="60" count="0" type="stmt"/>
         <line num="61" count="0" type="stmt"/>
-        <line num="62" count="0" type="cond" truecount="0" falsecount="1"/>
+        <line num="62" count="0" type="stmt"/>
         <line num="63" count="0" type="stmt"/>
-        <line num="64" count="0" type="stmt"/>
-        <line num="65" count="0" type="stmt"/>
-        <line num="66" count="0" type="stmt"/>
-        <line num="71" count="0" type="stmt"/>
-        <line num="76" count="0" type="stmt"/>
+        <line num="68" count="0" type="stmt"/>
+        <line num="73" count="0" type="stmt"/>
       </file>
     </package>
     <package name="src.Components.customComponents.Button">
@@ -101,7 +99,7 @@
         <line num="1" count="0" type="stmt"/>
         <line num="5" count="0" type="stmt"/>
         <line num="6" count="0" type="stmt"/>
-        <line num="14" count="0" type="stmt"/>
+        <line num="13" count="0" type="stmt"/>
       </file>
     </package>
     <package name="src.HomePage.Content">
@@ -147,15 +145,6 @@
         <line num="21" count="0" type="stmt"/>
         <line num="24" count="0" type="stmt"/>
         <line num="36" count="0" type="stmt"/>
-      </file>
-    </package>
-    <package name="src.HomePage.LandingPage">
-      <metrics statements="3" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="0"/>
-      <file name="LandingPage.tsx" path="P:\VS CODE\Main-Project\Classroom\src\HomePage\LandingPage\LandingPage.tsx">
-        <metrics statements="3" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="0"/>
-        <line num="2" count="0" type="stmt"/>
-        <line num="3" count="0" type="stmt"/>
-        <line num="18" count="0" type="stmt"/>
       </file>
     </package>
     <package name="src.HomePage.SplashScreen">
@@ -304,9 +293,9 @@
       </file>
     </package>
     <package name="src.Login">
-      <metrics statements="23" coveredstatements="0" conditionals="4" coveredconditionals="0" methods="3" coveredmethods="0"/>
+      <metrics statements="22" coveredstatements="0" conditionals="4" coveredconditionals="0" methods="3" coveredmethods="0"/>
       <file name="Login.tsx" path="P:\VS CODE\Main-Project\Classroom\src\Login\Login.tsx">
-        <metrics statements="23" coveredstatements="0" conditionals="4" coveredconditionals="0" methods="3" coveredmethods="0"/>
+        <metrics statements="22" coveredstatements="0" conditionals="4" coveredconditionals="0" methods="3" coveredmethods="0"/>
         <line num="1" count="0" type="stmt"/>
         <line num="2" count="0" type="stmt"/>
         <line num="3" count="0" type="stmt"/>
@@ -324,12 +313,11 @@
         <line num="31" count="0" type="stmt"/>
         <line num="33" count="0" type="stmt"/>
         <line num="37" count="0" type="stmt"/>
-        <line num="38" count="0" type="stmt"/>
+        <line num="40" count="0" type="stmt"/>
         <line num="41" count="0" type="stmt"/>
-        <line num="42" count="0" type="stmt"/>
-        <line num="44" count="0" type="stmt"/>
-        <line num="46" count="0" type="stmt"/>
-        <line num="95" count="0" type="stmt"/>
+        <line num="43" count="0" type="stmt"/>
+        <line num="45" count="0" type="stmt"/>
+        <line num="94" count="0" type="stmt"/>
       </file>
     </package>
     <package name="src.NoDataFound">
@@ -428,9 +416,9 @@
       </file>
     </package>
     <package name="src.Pages.School">
-      <metrics statements="32" coveredstatements="0" conditionals="73" coveredconditionals="0" methods="6" coveredmethods="0"/>
+      <metrics statements="33" coveredstatements="0" conditionals="77" coveredconditionals="0" methods="6" coveredmethods="0"/>
       <file name="CustomizeSchool.tsx" path="P:\VS CODE\Main-Project\Classroom\src\Pages\School\CustomizeSchool.tsx">
-        <metrics statements="32" coveredstatements="0" conditionals="73" coveredconditionals="0" methods="6" coveredmethods="0"/>
+        <metrics statements="33" coveredstatements="0" conditionals="77" coveredconditionals="0" methods="6" coveredmethods="0"/>
         <line num="1" count="0" type="stmt"/>
         <line num="2" count="0" type="stmt"/>
         <line num="3" count="0" type="stmt"/>
@@ -441,28 +429,29 @@
         <line num="8" count="0" type="stmt"/>
         <line num="9" count="0" type="stmt"/>
         <line num="10" count="0" type="stmt"/>
-        <line num="21" count="0" type="stmt"/>
         <line num="22" count="0" type="stmt"/>
         <line num="23" count="0" type="stmt"/>
         <line num="24" count="0" type="stmt"/>
+        <line num="25" count="0" type="stmt"/>
         <line num="26" count="0" type="stmt"/>
-        <line num="28" count="0" type="stmt"/>
-        <line num="29" count="0" type="cond" truecount="0" falsecount="1"/>
-        <line num="30" count="0" type="stmt"/>
+        <line num="27" count="0" type="stmt"/>
+        <line num="29" count="0" type="stmt"/>
+        <line num="30" count="0" type="cond" truecount="0" falsecount="1"/>
         <line num="31" count="0" type="stmt"/>
-        <line num="33" count="0" type="stmt"/>
-        <line num="44" count="0" type="stmt"/>
-        <line num="45" count="0" type="stmt"/>
-        <line num="54" count="0" type="stmt"/>
-        <line num="55" count="0" type="stmt"/>
+        <line num="32" count="0" type="stmt"/>
+        <line num="34" count="0" type="stmt"/>
+        <line num="46" count="0" type="stmt"/>
+        <line num="47" count="0" type="stmt"/>
         <line num="56" count="0" type="stmt"/>
         <line num="57" count="0" type="stmt"/>
+        <line num="58" count="0" type="stmt"/>
         <line num="59" count="0" type="stmt"/>
         <line num="61" count="0" type="stmt"/>
-        <line num="65" count="0" type="stmt"/>
-        <line num="71" count="0" type="cond" truecount="0" falsecount="2"/>
-        <line num="79" count="0" type="cond" truecount="0" falsecount="4"/>
-        <line num="132" count="0" type="stmt"/>
+        <line num="63" count="0" type="stmt"/>
+        <line num="67" count="0" type="stmt"/>
+        <line num="73" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="81" count="0" type="cond" truecount="0" falsecount="4"/>
+        <line num="134" count="0" type="stmt"/>
       </file>
     </package>
     <package name="src.Pages.Student">
@@ -476,9 +465,9 @@
       </file>
     </package>
     <package name="src.Pages.Teacher">
-      <metrics statements="192" coveredstatements="0" conditionals="254" coveredconditionals="0" methods="49" coveredmethods="0"/>
+      <metrics statements="188" coveredstatements="0" conditionals="254" coveredconditionals="0" methods="47" coveredmethods="0"/>
       <file name="AddTeacher.tsx" path="P:\VS CODE\Main-Project\Classroom\src\Pages\Teacher\AddTeacher.tsx">
-        <metrics statements="114" coveredstatements="0" conditionals="148" coveredconditionals="0" methods="22" coveredmethods="0"/>
+        <metrics statements="111" coveredstatements="0" conditionals="147" coveredconditionals="0" methods="21" coveredmethods="0"/>
         <line num="1" count="0" type="stmt"/>
         <line num="2" count="0" type="stmt"/>
         <line num="3" count="0" type="stmt"/>
@@ -553,49 +542,46 @@
         <line num="158" count="0" type="cond" truecount="0" falsecount="4"/>
         <line num="159" count="0" type="cond" truecount="0" falsecount="1"/>
         <line num="160" count="0" type="stmt"/>
-        <line num="163" count="0" type="stmt"/>
-        <line num="164" count="0" type="cond" truecount="0" falsecount="1"/>
-        <line num="165" count="0" type="stmt"/>
-        <line num="171" count="0" type="stmt"/>
-        <line num="173" count="0" type="stmt"/>
-        <line num="181" count="0" type="cond" truecount="0" falsecount="13"/>
-        <line num="182" count="0" type="stmt"/>
-        <line num="183" count="0" type="stmt"/>
-        <line num="186" count="0" type="stmt"/>
-        <line num="187" count="0" type="stmt"/>
-        <line num="191" count="0" type="stmt"/>
+        <line num="164" count="0" type="stmt"/>
+        <line num="166" count="0" type="stmt"/>
+        <line num="174" count="0" type="cond" truecount="0" falsecount="13"/>
+        <line num="175" count="0" type="stmt"/>
+        <line num="176" count="0" type="stmt"/>
+        <line num="179" count="0" type="stmt"/>
+        <line num="180" count="0" type="stmt"/>
+        <line num="184" count="0" type="stmt"/>
+        <line num="185" count="0" type="stmt"/>
         <line num="192" count="0" type="stmt"/>
-        <line num="199" count="0" type="stmt"/>
-        <line num="200" count="0" type="stmt"/>
-        <line num="208" count="0" type="stmt"/>
-        <line num="209" count="0" type="stmt"/>
-        <line num="212" count="0" type="cond" truecount="0" falsecount="7"/>
-        <line num="213" count="0" type="stmt"/>
-        <line num="217" count="0" type="stmt"/>
-        <line num="229" count="0" type="stmt"/>
+        <line num="193" count="0" type="stmt"/>
+        <line num="201" count="0" type="stmt"/>
+        <line num="202" count="0" type="stmt"/>
+        <line num="205" count="0" type="cond" truecount="0" falsecount="7"/>
+        <line num="206" count="0" type="stmt"/>
+        <line num="210" count="0" type="stmt"/>
+        <line num="222" count="0" type="stmt"/>
+        <line num="224" count="0" type="cond" truecount="0" falsecount="1"/>
+        <line num="225" count="0" type="stmt"/>
+        <line num="226" count="0" type="stmt"/>
+        <line num="227" count="0" type="stmt"/>
         <line num="231" count="0" type="cond" truecount="0" falsecount="1"/>
-        <line num="232" count="0" type="stmt"/>
-        <line num="233" count="0" type="stmt"/>
-        <line num="234" count="0" type="stmt"/>
-        <line num="238" count="0" type="cond" truecount="0" falsecount="1"/>
-        <line num="242" count="0" type="stmt"/>
-        <line num="253" count="0" type="cond" truecount="0" falsecount="1"/>
-        <line num="254" count="0" type="stmt"/>
-        <line num="255" count="0" type="stmt"/>
+        <line num="235" count="0" type="stmt"/>
+        <line num="246" count="0" type="cond" truecount="0" falsecount="1"/>
+        <line num="247" count="0" type="stmt"/>
+        <line num="248" count="0" type="stmt"/>
+        <line num="249" count="0" type="stmt"/>
+        <line num="250" count="0" type="stmt"/>
+        <line num="251" count="0" type="stmt"/>
         <line num="256" count="0" type="stmt"/>
         <line num="257" count="0" type="stmt"/>
-        <line num="258" count="0" type="stmt"/>
-        <line num="263" count="0" type="stmt"/>
+        <line num="261" count="0" type="stmt"/>
         <line num="264" count="0" type="stmt"/>
-        <line num="268" count="0" type="stmt"/>
-        <line num="271" count="0" type="stmt"/>
-        <line num="284" count="0" type="cond" truecount="0" falsecount="4"/>
-        <line num="316" count="0" type="stmt"/>
-        <line num="370" count="0" type="stmt"/>
-        <line num="387" count="0" type="stmt"/>
+        <line num="277" count="0" type="cond" truecount="0" falsecount="4"/>
+        <line num="309" count="0" type="stmt"/>
+        <line num="363" count="0" type="stmt"/>
+        <line num="380" count="0" type="stmt"/>
       </file>
       <file name="TeacherList.tsx" path="P:\VS CODE\Main-Project\Classroom\src\Pages\Teacher\TeacherList.tsx">
-        <metrics statements="60" coveredstatements="0" conditionals="88" coveredconditionals="0" methods="17" coveredmethods="0"/>
+        <metrics statements="59" coveredstatements="0" conditionals="89" coveredconditionals="0" methods="16" coveredmethods="0"/>
         <line num="1" count="0" type="stmt"/>
         <line num="2" count="0" type="stmt"/>
         <line num="3" count="0" type="stmt"/>
@@ -626,36 +612,35 @@
         <line num="53" count="0" type="stmt"/>
         <line num="54" count="0" type="stmt"/>
         <line num="57" count="0" type="stmt"/>
-        <line num="58" count="0" type="cond" truecount="0" falsecount="1"/>
+        <line num="58" count="0" type="cond" truecount="0" falsecount="2"/>
         <line num="59" count="0" type="stmt"/>
         <line num="60" count="0" type="stmt"/>
         <line num="61" count="0" type="stmt"/>
+        <line num="63" count="0" type="cond" truecount="0" falsecount="1"/>
+        <line num="64" count="0" type="stmt"/>
         <line num="65" count="0" type="stmt"/>
-        <line num="66" count="0" type="cond" truecount="0" falsecount="1"/>
-        <line num="67" count="0" type="stmt"/>
-        <line num="68" count="0" type="stmt"/>
-        <line num="69" count="0" type="stmt"/>
-        <line num="73" count="0" type="stmt"/>
-        <line num="74" count="0" type="cond" truecount="0" falsecount="12"/>
-        <line num="75" count="0" type="stmt"/>
-        <line num="84" count="0" type="stmt"/>
-        <line num="85" count="0" type="stmt"/>
-        <line num="91" count="0" type="cond" truecount="0" falsecount="12"/>
-        <line num="98" count="0" type="stmt"/>
-        <line num="119" count="0" type="stmt"/>
-        <line num="120" count="0" type="cond" truecount="0" falsecount="2"/>
-        <line num="122" count="0" type="stmt"/>
-        <line num="123" count="0" type="stmt"/>
-        <line num="131" count="0" type="stmt"/>
-        <line num="135" count="0" type="stmt"/>
-        <line num="136" count="0" type="stmt"/>
+        <line num="66" count="0" type="stmt"/>
+        <line num="70" count="0" type="stmt"/>
+        <line num="71" count="0" type="cond" truecount="0" falsecount="12"/>
+        <line num="72" count="0" type="stmt"/>
+        <line num="82" count="0" type="stmt"/>
+        <line num="83" count="0" type="stmt"/>
+        <line num="89" count="0" type="cond" truecount="0" falsecount="12"/>
+        <line num="96" count="0" type="stmt"/>
+        <line num="117" count="0" type="stmt"/>
+        <line num="118" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="120" count="0" type="stmt"/>
+        <line num="121" count="0" type="stmt"/>
+        <line num="129" count="0" type="stmt"/>
+        <line num="133" count="0" type="stmt"/>
+        <line num="134" count="0" type="stmt"/>
+        <line num="137" count="0" type="stmt"/>
+        <line num="138" count="0" type="stmt"/>
         <line num="139" count="0" type="stmt"/>
-        <line num="140" count="0" type="stmt"/>
-        <line num="141" count="0" type="stmt"/>
-        <line num="144" count="0" type="stmt"/>
-        <line num="149" count="0" type="stmt"/>
-        <line num="159" count="0" type="stmt"/>
-        <line num="169" count="0" type="stmt"/>
+        <line num="142" count="0" type="stmt"/>
+        <line num="147" count="0" type="stmt"/>
+        <line num="157" count="0" type="stmt"/>
+        <line num="167" count="0" type="stmt"/>
       </file>
       <file name="UploadImagePopup.tsx" path="P:\VS CODE\Main-Project\Classroom\src\Pages\Teacher\UploadImagePopup.tsx">
         <metrics statements="7" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="0"/>
@@ -711,20 +696,14 @@
       </file>
     </package>
     <package name="src.graphql">
-      <metrics statements="13" coveredstatements="0" conditionals="20" coveredconditionals="0" methods="0" coveredmethods="0"/>
-      <file name="UpdateSchoolApi.tsx" path="P:\VS CODE\Main-Project\Classroom\src\graphql\UpdateSchoolApi.tsx">
-        <metrics statements="2" coveredstatements="0" conditionals="2" coveredconditionals="0" methods="0" coveredmethods="0"/>
-        <line num="1" count="0" type="stmt"/>
-        <line num="3" count="0" type="cond" truecount="0" falsecount="2"/>
-      </file>
+      <metrics statements="10" coveredstatements="0" conditionals="16" coveredconditionals="0" methods="0" coveredmethods="0"/>
       <file name="mutation.ts" path="P:\VS CODE\Main-Project\Classroom\src\graphql\mutation.ts">
-        <metrics statements="6" coveredstatements="0" conditionals="10" coveredconditionals="0" methods="0" coveredmethods="0"/>
+        <metrics statements="5" coveredstatements="0" conditionals="8" coveredconditionals="0" methods="0" coveredmethods="0"/>
         <line num="1" count="0" type="stmt"/>
         <line num="3" count="0" type="cond" truecount="0" falsecount="2"/>
         <line num="11" count="0" type="cond" truecount="0" falsecount="2"/>
         <line num="19" count="0" type="cond" truecount="0" falsecount="2"/>
         <line num="27" count="0" type="cond" truecount="0" falsecount="2"/>
-        <line num="35" count="0" type="cond" truecount="0" falsecount="2"/>
       </file>
       <file name="query.ts" path="P:\VS CODE\Main-Project\Classroom\src\graphql\query.ts">
         <metrics statements="5" coveredstatements="0" conditionals="8" coveredconditionals="0" methods="0" coveredmethods="0"/>

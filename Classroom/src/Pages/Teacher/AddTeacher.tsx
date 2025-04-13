@@ -160,13 +160,6 @@ const AddTeacher = ({ setActivePage, selectedTeacherId,refetchTeachers }: Props)
        handleUploadtoS3(file, setProfileImageURL);
     }
   };
-  useEffect(() => {
-    if (profileImageURL) {
-      console.log("profileImageURL updated:", profileImageURL);
-    }
-  }, [profileImageURL]);
-
-  
 
   const handleDelete = async () => {
     try {
@@ -294,7 +287,7 @@ const AddTeacher = ({ setActivePage, selectedTeacherId,refetchTeachers }: Props)
         }
         <input id='fileInput' type="file" accept='image/*' 
         {...register("profileImageURL",)}
-        style={{display:'none'}}  onChange={handleImageUpload}/>
+        className="img-upload" onChange={handleImageUpload}/>
         {errors.profileImageURL && <p className="err-msg">{errors.profileImageURL.message}</p> }
 
         <div>
