@@ -96,7 +96,7 @@
 
     .section {
       background-color: var(--box-background);
-      height: 70px;
+      height: 60px;
       width: 100px;
       border-radius: 10px;
       display: flex;
@@ -142,8 +142,12 @@
         cursor: pointer;
         font-weight: 600;
         font-size: 12px;
-        &:hover {
+        width: 100%;
+        
+        &.active{
           color: var(--primaryColor);
+          border-right: 5px solid var(--primaryColor);
+          box-sizing: border-box;
         }
         
       }
@@ -164,7 +168,8 @@
   }
 }
 
-@media (max-width: 768px) {
+
+@media (max-width: 1120px) {
   .sidebar-container {
     width: 100%;
     gap: 20px;
@@ -214,7 +219,7 @@
         position: fixed;
         top: 0;
         left: 0 !important;
-        width: 50%;
+        width: 40%;
         z-index: 2000 !important;
         
 
@@ -228,7 +233,7 @@
         left: 0 ;
         margin: 0;
         padding: 0;
-        width: 50%;
+        width: 40%;
         height: 100%;
         border-radius: 0;
         background-color: var(--background);

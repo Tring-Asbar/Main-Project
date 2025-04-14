@@ -25,9 +25,9 @@ export const passwordValidation = {
     /^.{8,}$/.test(value) || "Password should be at least 8 characters",
   maxLength: (value : string) =>
     /^.{0,30}$/.test(value) || "Password should not exceed 30 characters",
-  // specialCharactersUpperLowerNumber: (value:string) =>
-  //   /(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[!@#$%^&*(),.?":{}|<>_\-+=\\[\]\/`~';])/.test(value) || 
-  //           "Password must contain atleast one uppercase letter, lowercase letter, number and special character"
+  specialCharactersUpperLowerNumber: (value:string) =>
+    /(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[!@#$%^&*(),.?":{}|<>_\-+=\\[\]\/`~';])/.test(value) || 
+            "Password must contain atleast one uppercase letter, lowercase letter, number and special character"
 
 }
 

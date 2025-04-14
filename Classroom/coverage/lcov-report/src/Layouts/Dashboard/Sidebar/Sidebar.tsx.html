@@ -274,12 +274,12 @@
 <span class="cstat-no" title="statement not covered" >import { useNavigate, Link } from "react-router-dom";</span>
 <span class="cstat-no" title="statement not covered" >import './Sidebar.scss';</span>
 <span class="cstat-no" title="statement not covered" >import KatonSchool from '../../../assets/Images/Katon.svg';</span>
-<span class="cstat-no" title="statement not covered" >import dashboard from '../../../assets/Images/MenuIcon/Icon.svg'</span>
-<span class="cstat-no" title="statement not covered" >import workshop from '../../../assets/Images/MenuIcon/workshop.svg'</span>
-<span class="cstat-no" title="statement not covered" >import notification from '../../../assets/Images/MenuIcon/notification.svg'</span>
-<span class="cstat-no" title="statement not covered" >import sysMsg from '../../../assets/Images/MenuIcon/sys-msg.svg'</span>
-<span class="cstat-no" title="statement not covered" >import settings from '../../../assets/Images/MenuIcon/settings.svg'</span>
-<span class="cstat-no" title="statement not covered" >import help from '../../../assets/Images/MenuIcon/help.svg'</span>
+<span class="cstat-no" title="statement not covered" >import Dashboard from '../../../assets/Images/MenuIcon/Icon.svg'</span>
+<span class="cstat-no" title="statement not covered" >import Workshop from '../../../assets/Images/MenuIcon/workshop.svg'</span>
+<span class="cstat-no" title="statement not covered" >import Notification from '../../../assets/Images/MenuIcon/notification.svg'</span>
+<span class="cstat-no" title="statement not covered" >import SysMsg from '../../../assets/Images/MenuIcon/sys-msg.svg'</span>
+<span class="cstat-no" title="statement not covered" >import Settings from '../../../assets/Images/MenuIcon/settings.svg'</span>
+<span class="cstat-no" title="statement not covered" >import Help from '../../../assets/Images/MenuIcon/help.svg'</span>
 <span class="cstat-no" title="statement not covered" >import logout from '../../../assets/Images/MenuIcon/logout.svg'</span>
 <span class="cstat-no" title="statement not covered" >import Logout from '../../../assets/Images/logout.gif'</span>
 <span class="cstat-no" title="statement not covered" >import { Dialog } from "@mui/material";</span>
@@ -292,16 +292,16 @@
 const Sidebar = <span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >() =&gt; {</span></span>
   const [isOpen<span class="cstat-no" title="statement not covered" >, s</span>etIsOpen<span class="cstat-no" title="statement not covered" >] = <span class="cstat-no" title="statement not covered" >u</span>seState(false);</span>
   const [logoutBtn<span class="cstat-no" title="statement not covered" >, s</span>etLogoutBtn<span class="cstat-no" title="statement not covered" >] = <span class="cstat-no" title="statement not covered" >u</span>seState(false);</span>
-  const [isActive<span class="cstat-no" title="statement not covered" >,s</span>etIsActive<span class="cstat-no" title="statement not covered" >] = <span class="cstat-no" title="statement not covered" >u</span>seState&lt;boolean&gt;(false)</span>
+  const [isActive<span class="cstat-no" title="statement not covered" >,s</span>etIsActive<span class="cstat-no" title="statement not covered" >] = <span class="cstat-no" title="statement not covered" >u</span>seState("")</span>
   const navigate = <span class="cstat-no" title="statement not covered" >useNavigate();</span>
 &nbsp;
   const sidebarMenu = <span class="cstat-no" title="statement not covered" >[</span>
-    { icon:dashboard, path: '/admin-dashboard', label: 'Dashboard' },
-    { icon:workshop, path: '/admin-workshop', label: 'Workshop' },
-    { icon:notification, path: '/admin-notification', label: 'Notification' },
-    { icon:sysMsg, path: '/admin-system-message', label: 'System Messages' },
-    { icon:settings, path: '/admin-settings', label: 'Settings' },
-    { icon:help, path: '/admin-help', label: 'Help' }
+    { icon:Dashboard, path: '/admin-dashboard', label: 'Dashboard' },
+    { icon:Workshop, path: '/admin-workshop', label: 'Workshop' },
+    { icon:Notification, path: '/admin-notification', label: 'Notification' },
+    { icon:SysMsg, path: '/admin-system-message', label: 'System Messages' },
+    { icon:Settings, path: '/admin-settings', label: 'Settings' },
+    { icon:Help, path: '/admin-help', label: 'Help' }
   ];
 &nbsp;
   const handleLogout = <span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >async () =&gt; {</span></span>
@@ -361,7 +361,7 @@ const Sidebar = <span class="cstat-no" title="statement not covered" ><span clas
         {sidebarMenu.map(<span class="fstat-no" title="function not covered" >(m</span>enu) =&gt; <span class="cstat-no" title="statement not covered" >(</span>
           &lt;div key={menu.path} className="menu"&gt;
             &lt;img src={menu.icon} alt="icon"/&gt;
-            &lt;Link to={menu.path} className={isActive ? "active" : ""} onClick={<span class="fstat-no" title="function not covered" >()=&gt;<span class="cstat-no" title="statement not covered" >s</span>etIsActive(true)}&gt;{m</span>enu.label}&lt;/Link&gt;
+            &lt;Link to={menu.path} className={isActive===menu.label ? "active" : ""} onClick={<span class="fstat-no" title="function not covered" >()=&gt;<span class="cstat-no" title="statement not covered" >s</span>etIsActive(menu.label)}&gt;{m</span>enu.label}&lt;/Link&gt;
           &lt;/div&gt;
         ))}
         &lt;div onClick={<span class="fstat-no" title="function not covered" >() =&gt; <span class="cstat-no" title="statement not covered" >s</span>etLogoutBtn(true)} c</span>lassName="logout"&gt;&lt;img src={logout}/&gt;&lt;p&gt;Logout&lt;/p&gt;&lt;/div&gt;
@@ -379,7 +379,7 @@ const Sidebar = <span class="cstat-no" title="statement not covered" ><span clas
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2025-04-13T16:09:43.841Z
+                at 2025-04-14T15:40:12.829Z
             </div>
         <script src="../../../../prettify.js"></script>
         <script>

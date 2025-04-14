@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1744560583924" clover="3.2.0">
-  <project timestamp="1744560583924" name="All files">
-    <metrics statements="542" coveredstatements="7" conditionals="442" coveredconditionals="0" methods="117" coveredmethods="2" elements="1101" coveredelements="9" complexity="0" loc="542" ncloc="542" packages="25" files="37" classes="37"/>
+<coverage generated="1744645212902" clover="3.2.0">
+  <project timestamp="1744645212902" name="All files">
+    <metrics statements="543" coveredstatements="7" conditionals="444" coveredconditionals="0" methods="118" coveredmethods="2" elements="1105" coveredelements="9" complexity="0" loc="543" ncloc="543" packages="25" files="37" classes="37"/>
     <package name="src">
       <metrics statements="54" coveredstatements="0" conditionals="12" coveredconditionals="0" methods="8" coveredmethods="0"/>
       <file name="App.tsx" path="P:\VS CODE\Main-Project\Classroom\src\App.tsx">
@@ -99,7 +99,7 @@
         <line num="1" count="0" type="stmt"/>
         <line num="5" count="0" type="stmt"/>
         <line num="6" count="0" type="stmt"/>
-        <line num="13" count="0" type="stmt"/>
+        <line num="14" count="0" type="stmt"/>
       </file>
     </package>
     <package name="src.HomePage.Content">
@@ -465,7 +465,7 @@
       </file>
     </package>
     <package name="src.Pages.Teacher">
-      <metrics statements="188" coveredstatements="0" conditionals="254" coveredconditionals="0" methods="47" coveredmethods="0"/>
+      <metrics statements="189" coveredstatements="0" conditionals="256" coveredconditionals="0" methods="48" coveredmethods="0"/>
       <file name="AddTeacher.tsx" path="P:\VS CODE\Main-Project\Classroom\src\Pages\Teacher\AddTeacher.tsx">
         <metrics statements="111" coveredstatements="0" conditionals="147" coveredconditionals="0" methods="21" coveredmethods="0"/>
         <line num="1" count="0" type="stmt"/>
@@ -653,7 +653,7 @@
         <line num="25" count="0" type="stmt"/>
       </file>
       <file name="Validation.tsx" path="P:\VS CODE\Main-Project\Classroom\src\Pages\Teacher\Validation.tsx">
-        <metrics statements="11" coveredstatements="0" conditionals="18" coveredconditionals="0" methods="9" coveredmethods="0"/>
+        <metrics statements="12" coveredstatements="0" conditionals="20" coveredconditionals="0" methods="10" coveredmethods="0"/>
         <line num="1" count="0" type="stmt"/>
         <line num="3" count="0" type="cond" truecount="0" falsecount="2"/>
         <line num="6" count="0" type="cond" truecount="0" falsecount="2"/>
@@ -665,6 +665,7 @@
         <line num="23" count="0" type="cond" truecount="0" falsecount="2"/>
         <line num="25" count="0" type="cond" truecount="0" falsecount="2"/>
         <line num="27" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="29" count="0" type="cond" truecount="0" falsecount="2"/>
       </file>
     </package>
     <package name="src.Routes">
