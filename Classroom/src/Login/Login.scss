@@ -29,6 +29,27 @@
             font-weight:600;
             font-size:12px
         }
+        .password {
+            display: flex;
+            position: relative; 
+        
+            .field {
+                width: 281px;
+                height: 41px;
+                border-radius: 5px;
+                outline: none;
+                margin: 0 23px;
+            }
+        
+            .eye-icon {
+                position: absolute;  
+                top: 50%;
+                right: 40px;  
+                transform: translateY(-50%); 
+                cursor: pointer;
+                color: var(--footerContent);
+              }
+        }
         .field{
             width: 281px;
             height: 41px;
@@ -36,8 +57,8 @@
             border-radius: 5px;
             outline: none;
             margin: 0px 23px;
-            
         }
+        
         input{
             padding-left: 10px;
         }
@@ -84,6 +105,27 @@
             .err-msg{
                 color: var(--error);
                 margin: 3px 15px;
+            }
+            .password {
+                display: flex;
+                position: relative; 
+            
+                .field {
+                    width: 96%;
+                    height: 41px;
+                    border-radius: 5px;
+                    outline: none;
+                    margin: 0;
+                }
+            
+                .eye-icon {
+                    position: absolute;  
+                    top: 50%;
+                    right: 10px;  
+                    transform: translateY(-50%); 
+                    cursor: pointer;
+                    color: var(--footerContent);
+                  }
             }
             .field{
                 width: 96%;

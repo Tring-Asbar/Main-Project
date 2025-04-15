@@ -5,6 +5,9 @@ import bg from '../assets/Images/Login-bg.svg'
 import { signIn } from "aws-amplify/auth"
 import ToastMessage from "../Components/customComponents/Toast/ToastMessage"
 import './Login.scss'
+import Button from "../Components/customComponents/Button/Button"
+import VisibilityIcon from '@mui/icons-material/Visibility';
+import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
 
 type FormData={
   username : string
@@ -12,6 +15,7 @@ type FormData={
 }
 
 const Login = () => {
+  const [showPassword, setShowPassword] = useState(false);
 
   const navigate = useNavigate();
 
@@ -33,7 +37,6 @@ const Login = () => {
         username,
         password
       })
-      localStorage.setItem('loginpage',username)
       navigate('/admin-dashboard')
     }
     catch(err){
@@ -66,20 +69,26 @@ const Login = () => {
                 {errors.username && <p className="err-msg">{errors.username.message}</p>}
               </div>
               <br />
-              <div>
+              <div className="password  ">
                 <input 
-                type='password'
+                type={showPassword ? 'text' : 'password'}
                 placeholder = 'Password'
                 className="field"
                 {...register("password",{
                   required:"Password is required",
                 })}
                 />
+                 <span
+                  className="eye-icon"
+                  onClick={() => setShowPassword(!showPassword)}
+                >
+                  {showPassword ? <VisibilityIcon/> : <VisibilityOffIcon/>}
+                </span>
                 {errors.password && <p className="err-msg">{errors.password.message}</p>}
               </div>
               <div className="submit">
                 <div></div>
-                <button type="submit" disabled={loading}>Login</button>
+                <Button type="submit" action='Login' disabled={loading}/>
               </div>
             </form>
           </div>

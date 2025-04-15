@@ -11,9 +11,10 @@
     justify-content: space-around;
     gap: 20px;
     .form-fields{
-        overflow-y: scroll;
+        padding: 15px 0;
         width: 90%;
         height:80vh;
+        overflow-y: scroll;
         background-color: var(--box-background);
         margin: 0% 5%;
         border-radius: 20px;
@@ -21,10 +22,30 @@
         flex-direction: column;
         align-items: center;
         justify-content: space-evenly;
+        gap: 15px;
+        .file-input{
+            border: none;
+            span{
+                background-color: var(--primaryColor);
+                color: var(--background);
+            }
+        }
         .edit{
-            display: flex;
-            justify-content: end;
-            align-items: end;
+            width: 70px;
+            cursor: pointer;
+            position: relative;
+            left: 43%;
+            border-radius: 20px;
+            border: none;
+            background-color: var(--primaryColor);
+            color: var(--background);
+            font-size: 12px;
+            font-weight: 600;
+            scrollbar-width: thin;
+            
+        }
+        .disabled{
+            display: none;
         }
         .profile{
             width: 102px;
@@ -33,21 +54,30 @@
             border-radius: 50%;
             img{
                 position:relative;
-                top: 25%;
-                left: 25%;
+                width: 102px;
+                height: 102px;
             }
         }
         div{
-            flex-shrink: 0;
+           
             label{
                 font-weight: 600;
                 font-size: 10px;
                 color: var(--primaryColor);
                 margin-left:15px;
             }
+            .readOnly{
+                color: var(--footerContent);
+            }
+            .field{
+                color:var(--blackColor);
+                
+            }
             input,textarea{
                 width: 25vw;
                 height: 5vh;
+                font-weight: 400;
+                font-size: 12px;
                 border-radius: 10px;
                 border: none;
                 outline: none;
@@ -55,7 +85,9 @@
                 padding-left: 10px;
             }
             textarea{
+                width: 24vw;
                 height: 15vh;
+                padding: 10px;
             }
             
         }

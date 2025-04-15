@@ -1,116 +1,103 @@
-import { signOut } from "aws-amplify/auth"
-import { useState } from "react"
-import { useNavigate , Link } from "react-router-dom"
-import './Sidebar.scss'
-import KatonSchool from '../../../assets/Images/Katon.svg'
-import icon from '../../../assets/Images/MenuIcon/DashboardIcon.svg'
-import { Dialog , DialogContent , DialogActions , Button } from "@mui/material"
-import bg from '../../../assets/Images/Katon.svg'
+import { signOut } from "aws-amplify/auth";
+import { useState } from "react";
+import { useNavigate, Link } from "react-router-dom";
+import './Sidebar.scss';
+import KatonSchool from '../../../assets/Images/Katon.svg';
+import Dashboard from '../../../assets/Images/MenuIcon/Icon.svg'
+import Workshop from '../../../assets/Images/MenuIcon/workshop.svg'
+import Notification from '../../../assets/Images/MenuIcon/notification.svg'
+import SysMsg from '../../../assets/Images/MenuIcon/sys-msg.svg'
+import Settings from '../../../assets/Images/MenuIcon/settings.svg'
+import Help from '../../../assets/Images/MenuIcon/help.svg'
+import logout from '../../../assets/Images/MenuIcon/logout.svg'
+import Logout from '../../../assets/Images/logout.gif'
+import { Dialog } from "@mui/material";
+import MenuIcon from '@mui/icons-material/Menu';
+import { useQuery } from "@apollo/client";
+import { CURRENT_USER } from "../../../graphql/query";
+import Button from "../../../Components/customComponents/Button/Button";
+
 
 const Sidebar = () => {
+  const [isOpen, setIsOpen] = useState(false);
+  const [logoutBtn, setLogoutBtn] = useState(false);
+  const [isActive,setIsActive] = useState("")
+  const navigate = useNavigate();
 
-    const navigate = useNavigate();
-    const [LogoutBtn,setLogoutBtn] = useState(false)
+  const sidebarMenu = [
+    { icon:Dashboard, path: '/admin-dashboard', label: 'Dashboard' },
+    { icon:Workshop, path: '/admin-workshop', label: 'Workshop' },
+    { icon:Notification, path: '/admin-notification', label: 'Notification' },
+    { icon:SysMsg, path: '/admin-system-message', label: 'System Messages' },
+    { icon:Settings, path: '/admin-settings', label: 'Settings' },
+    { icon:Help, path: '/admin-help', label: 'Help' }
+  ];
 
-    const sidebarMenu = [
-        
-        {
-            icon,
-            path:'/admin-dashboard',
-            label:'Dashboard'
-        },
-        {
-            icon,
-            path:'/admin-workshop',
-            label:'Workshop'
-        },
-        {
-            icon,
-            path:'/admin-notification',
-            label:'Notification'
-        },
-        {
-            icon,
-            path:'/admin-system-message',
-            label:'System Messages'
-        },
-        {
-            icon,
-            path:'/admin-settings',
-            label:'Settings'
-        },
-        {
-            icon,
-            path:'/admin-help',
-            label:'Help'
-        }
-    ]
-    
-    const setLogoutBtnState = (value:boolean) =>{
-        setLogoutBtn(value);
+  const handleLogout = async () => {
+    try {
+      await signOut();
+      navigate('/');
+    } catch (err) {
+      console.error(err);
     }
+  };
 
-    const logoutPopup = () =>{
-        return(
-            <div className="popup">
-                <Dialog open={true} maxWidth='sm' sx={{borderRadius:'90px'}}>
-                    {/* <img src={bg} alt="dbbb" width={100} height={100} style={{display:"flex",justifyContent:'center',alignItems:'center'}} /> */}
-                    <DialogContent>
-                        <p>Are you sure you want to Log Out?</p>
-                    </DialogContent>
-                    <DialogActions>
-                        <Button sx={{display:'flex',justifyContent:'center',alignItems:'center'}} variant="contained" onClick={()=>handleLogout()} className="yes">Yes</Button>
-                        <Button variant="contained" onClick={()=>setLogoutBtnState(false)} className="no" color="inherit">No</Button>
-                    </DialogActions>
-                </Dialog>
-            </div>
-        )
-    }
+  const logoutPopup = () => (
+    <div className="popup">
+      <Dialog open={true} className="dialogMainContainer" >
+        <img src={Logout} alt="logout" />
+          <p>Are you sure you want to Log Out?</p>
+        <div className="buttons">
 
-    const handleLogout = async() =>{
-        try{
-            await signOut();
-            localStorage.removeItem('loginpage')
-            navigate('/');
-        }
-        catch(err){
-            console.error(err);
-        } 
-    }
+          <Button className="yes" action="Yes" onClick={handleLogout}/>
+          <Button className="no" action="No" onClick={() => setLogoutBtn(false)}/>
+        </div>
+      </Dialog>
+    </div>
+  );
+
+  const {data} =useQuery(CURRENT_USER)
 
   return (
-    <div className="sidebar-container">
-        <div className="sidebar-header">
-            <img src={KatonSchool}  alt="Image" />
-            <h4>Katon School</h4>
-        </div>
+    <div className={`sidebar-container ${isOpen ? 'open' : ''}`}>
+      <div className="sidebar-header">
+        {data?.getCurrentUser?.nodes?.map((user:any)=>
+          (user?.schoolAdminsByUId?.nodes?.map((school:any)=>(
+            <div className="logo">
+              <img src={KatonSchool} alt="Katon School" />
+              <h4>{school.saName}</h4>
+            </div>
+          )))
+        )}
         
+        <button className="menu-toggle" onClick={() => setIsOpen(!isOpen)}>
+          <MenuIcon />
+        </button>
+      </div>
 
-        <div className="sidebar-section">
-            <div className="section" onClick={()=>navigate('/admin-school')}>
-                <p>Customize</p>
-                <p>School</p>
-            </div>
-            <div className="section">
-                <p>Edit</p>
-                <p>Calendar</p>
-            </div>
+      <div className="sidebar-section">
+        <div className="section" onClick={() => navigate('/admin-school')}>
+          <p>Customize</p>
+          <p>School</p>
         </div>
-        <div className="sidebar-menu">
-            {sidebarMenu.map((menu)=>(
-                <div key={menu.path} className="menu">
-                    <Link to={menu.path}>
-                    {menu.label}
-                    </Link>
-                </div>
-            ))}
-            <div onClick={()=>setLogoutBtnState(true)} className="logout">Logout</div>
-            {
-                LogoutBtn && logoutPopup()
-            }
+        <div className="section">
+          <p>Edit</p>
+          <p>Calendar</p>
         </div>
+      </div>
+
+      <div className="sidebar-menu">
+        {sidebarMenu.map((menu) => (
+          <div key={menu.path} className="menu">
+            <img src={menu.icon} alt="icon"/>
+            <Link to={menu.path} className={isActive===menu.label ? "active" : ""} onClick={()=>setIsActive(menu.label)}>{menu.label}</Link>
+          </div>
+        ))}
+        <div onClick={() => setLogoutBtn(true)} className="logout"><img src={logout}/><p>Logout</p></div>
+        {logoutBtn && logoutPopup()}
+      </div>
     </div>
-  )
-}
+  );
+};
 
-export default Sidebar
+export default Sidebar;

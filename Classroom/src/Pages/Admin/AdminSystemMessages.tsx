@@ -1,7 +1,7 @@
 import './Styles/comingSoon.scss'
 const AdminSystemMessages = () => {
   return (
-    <div className="Coming-Soon">
+    <div className="coming-soon">
         Coming Soon
     </div>
   )

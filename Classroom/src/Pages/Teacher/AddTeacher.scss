@@ -10,7 +10,7 @@
     display: flex;
     flex-direction: column;
     justify-content: space-around;
-    gap: 20px;
+    gap: 5px;
     .form-header{
         display: flex;
         justify-content: space-around;
@@ -24,15 +24,24 @@
         }
     }
         .form-section{
+            padding: 10px 0;
             width: 90%;
-            height:70vh;
+            height: 500px;
+            overflow-y: auto;
             background-color: var(--box-background);
             margin: 0% 5%;
             border-radius: 20px;
             display: flex;
             flex-direction: column;
+            justify-content: center;
             align-items: center;
-            justify-content: space-evenly;
+            gap: 10px;
+            scrollbar-width: thin;
+
+            .img-upload{
+                display: none;
+            }
+            
             button{
                 border: none;
                 span{
@@ -47,6 +56,7 @@
                 p{
                     font-size: 12px;
                     font-weight: 400;
+                    cursor: pointer;
                 }   
             }
             
@@ -54,16 +64,18 @@
                 color: var(--error);
                 font-size: 12px;
                 font-weight: 400;
+                width: 75%;
+                
             }
-            .profile{
-                width: 102px;
-                height: 102px;
+            .profile{                
                 background-color: var(--background);
                 border-radius: 50%;
+                
                 img{
-                    position:relative;
-                    top: 25%;
-                    left: 25%;
+                    width: 90px;
+                    // position:relative;
+                    // top: 25%;
+                    // left: 25%;
                 }
             }
             
@@ -81,8 +93,9 @@
                 outline: none;
                 padding-left: 10px;
             }
+            .subjects{
             .subject{
-                display: flex;
+                display: grid;
                 flex-direction: row;
                 justify-content: space-between;
                 margin-top: 15px;
@@ -90,6 +103,7 @@
                     width: 7.5vw;
                 }
             }
+        }
             .buttons{
                 display: flex;
                 gap:200px;
